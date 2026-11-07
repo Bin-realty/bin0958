@@ -568,9 +568,9 @@ function renderBudget(){
   const equalInt=P*MR*(N+1)/2;
   set("flowLine","貸款 "+fmtWan(b.loan)+" 萬，分 30 年還 → 每月約 NT$ "+fmtWan(b.level));
   set("outLevel","NT$ "+fmtWan(b.level)+" /月");
-  set("outLevelTotal","30年總利息約 "+fmtWan(b.level*N-P)+" 元");
+  set("outLevelTotal","");
   set("outEqual","NT$ "+fmtWan(firstEqual)+" → "+fmtWan(lastEqual));
-  set("outEqualTotal","30年總利息約 "+fmtWan(equalInt)+" 元");
+  set("outEqualTotal","");
   return b;
 }
 function applyMode(prev){

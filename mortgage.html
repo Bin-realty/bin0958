@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>房貸試算｜蘇聖斌</title>
-<meta name="description" content="輸入房屋總價、貸款成數、年限、利率與寬限期，立即看每月還款、總利息、年度攤還表與年限比較。台灣房屋 松竹十一期 蘇聖斌提供。">
+<meta name="description" content="輸入房屋總價、貸款成數、年限、利率與寬限期，立即看每月還款、自備款、年度攤還表與年限比較。台灣房屋 松竹十一期 蘇聖斌提供。">
 <meta property="og:title" content="房貸試算｜蘇聖斌">
-<meta property="og:description" content="每月還款、總利息、寬限期、攤還表，一頁看懂。">
+<meta property="og:description" content="每月還款、自備款、寬限期、攤還表，一頁看懂。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
@@ -98,6 +98,12 @@ details.adv .body{padding-top:12px}
 .hero .lbl{font-size:13px;opacity:.85;letter-spacing:.5px}
 .hero .big{font-size:44px;font-weight:900;line-height:1.1;margin:4px 0 2px;font-variant-numeric:tabular-nums;letter-spacing:-.5px}
 .hero .big small{font-size:18px;font-weight:500;margin-left:4px;opacity:.9}
+.hero2{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+.hero2 div{flex:1 1 140px;background:rgba(255,255,255,.14);border-radius:10px;padding:9px 12px}
+.hero2 span{font-size:12px;opacity:.85;display:block}
+.hero2 b{font-size:24px;font-weight:900;font-variant-numeric:tabular-nums;line-height:1.2}
+.hero2 b.o{color:#ffc78a}
+@media (max-width:560px){.kpi:last-child:nth-child(odd){grid-column:1/-1}}
 .hero .plan{font-size:13px;opacity:.9;margin-top:10px;line-height:1.6;border-top:1px solid rgba(255,255,255,.25);padding-top:10px}
 .hero .plan b{font-weight:700;opacity:1}
 .phases{display:grid;gap:8px;margin-top:12px}
@@ -196,7 +202,7 @@ td.cmp{min-width:96px}
 
 <header class="hdr">
  <div class="in">
-  <a href="./" class="no-print" style="color:#fff;opacity:.8;font-size:12.5px;text-decoration:none;display:inline-block;margin-bottom:6px">‹ 回聖斌首頁</a><h1>房貸試算<small>輸入幾個數字，馬上看懂每月還款、總利息與還款規劃</small></h1>
+  <a href="./" class="no-print" style="color:#fff;opacity:.8;font-size:12.5px;text-decoration:none;display:inline-block;margin-bottom:6px">‹ 回聖斌首頁</a><h1>房貸試算<small>輸入幾個數字，馬上看懂每月還款、自備款與還款規劃</small></h1>
   <div class="brand"><b>台灣房屋 松竹十一期特許加盟店</b>專案經理 蘇聖斌　<a href="tel:0958810178">0958-810-178</a>（手機／LINE）</div>
  </div>
 </header>
@@ -258,9 +264,7 @@ td.cmp{min-width:96px}
    </details>
    <div class="note warn" id="qaNote" style="display:none">新青安：貸款額度最高 1,000 萬、最長 40 年、寬限期最長 5 年，利率依政府公告為準；超過 1,000 萬的部分需搭配一般房貸。</div>
    <div class="actions">
-    <button class="btn p" id="copyBtn">🔗 複製試算連結</button>
-    <button class="btn line" id="lineBtn">用 LINE 傳送</button>
-    <button class="btn" id="printBtn">🖨 列印／存 PDF</button>
+    <button class="btn line" id="lineBtn" style="flex:1">用 LINE 傳送給家人</button>
     <button class="btn g" id="resetBtn">重設</button>
    </div>
   </div>
@@ -272,6 +276,7 @@ td.cmp{min-width:96px}
   <div class="hero">
    <div class="lbl" id="heroLbl">每月還款（寬限期後）</div>
    <div class="big"><span id="heroAmt">—</span><small>元／月</small></div>
+   <div class="hero2"><div><span>自備款（頭期）</span><b class="o" id="heroDown">—</b></div><div><span>貸款金額</span><b id="heroLoan">—</b></div></div>
    <div class="phases" id="phases"></div>
    <div class="plan" id="planLine"></div>
   </div>
@@ -279,19 +284,15 @@ td.cmp{min-width:96px}
   <div class="kpis" id="kpis"></div>
 
   <div class="card" style="margin-top:16px">
-   <h2><span class="n">2</span>本金與利息 <span class="sub">整個貸款期間</span></h2>
-   <div class="ratio">
-    <div class="bar" id="ratioBar"></div>
-    <div class="lg"><span><i class="sw" style="background:var(--c-prin)"></i>本金 <b id="rPrin"></b></span><span><i class="sw" style="background:var(--c-int)"></i>利息 <b id="rInt"></b></span><span>合計 <b id="rTot"></b></span></div>
-   </div>
-   <div class="legend" style="margin-top:18px"><span><i class="sw" style="background:var(--c-prin)"></i>當年還本金</span><span><i class="sw" style="background:var(--c-int)"></i>當年繳利息</span><span style="margin-left:auto;color:var(--faint)">點一下長條看數字</span></div>
+   <h2><span class="n">2</span>貸款餘額逐年減少 <span class="sub">越還越少，房子越來越是你的</span></h2>
+   <div class="legend"><span><i class="sw" style="background:var(--c-prin)"></i>每年年末還剩多少貸款</span><span style="margin-left:auto;color:var(--faint)">點一下長條看數字</span></div>
    <div class="chart" id="chart"><div class="tip" id="tip"></div></div>
   </div>
 
   <div class="card">
    <h2><span class="n">3</span>年限比較 <span class="sub">同利率、同寬限期、同還款方式</span></h2>
    <div class="tbl" style="max-height:none"><table id="cmpTbl"></table></div>
-   <div class="tiny">年限越長，每月負擔越輕、但總利息越多；可以先選長年限保留彈性，手頭寬裕再提前還款（請留意銀行綁約期與提前清償規定）。</div>
+   <div class="tiny">年限越長，每月負擔越輕；可以先選長年限保留彈性，手頭寬裕再提前還款（請留意銀行綁約期與提前清償規定）。</div>
   </div>
 
   <div class="card">
@@ -416,14 +417,13 @@ function render(){
   $('heroLbl').textContent=S.grace>0?`每月還款（寬限期後，第 ${S.grace+1} 年起）`:(S.method===2?'每月還款（第 1 個月）':'每月還款');
   $('heroAmt').textContent=fmt(heroPay);$('stAmt').textContent=fmt(heroPay);$('stLbl').textContent=S.grace>0?'寬限期後每月':'每月還款';
   $('phases').innerHTML=ph.length>1||ph[0].vary?ph.map(p=>`<div class="phase"><div class="t">${p.label}${p.sub?`<small>${p.sub}</small>`:''}</div><div class="amt">${fmt(p.first)}${p.vary?` <small>→ ${fmt(p.last)}</small>`:''}<small> 元</small></div></div>`).join(''):'';
+  $('heroDown').textContent=wan(S.price*1e4-L);$('heroLoan').textContent=wan(L);
   $('planLine').innerHTML=`總價 <b>${wan(S.price*1e4)}</b>・貸 <b>${S.ltv.toFixed(0)} 成 ${wan(L)}</b>・自備 <b>${wan(S.price*1e4-L)}</b>・<b>${S.years} 年</b>・利率 <b>${S.rate}%</b>${S.two?`（前 ${S.y1} 年，之後 ${S.rate2}%）`:''}・寬限 <b>${S.grace?S.grace+' 年':'無'}</b>・<b>${S.method===1?'本息平均攤還':'本金平均攤還'}</b>`;
 
   /* KPI */
   const k=[];
-  k.push({l:'自備款（頭期）',v:wan(S.price*1e4-L),s:fmt(S.price*1e4-L)+' 元'});
-  k.push({l:'貸款金額',v:wan(L),s:fmt(L)+' 元'});
-  k.push({l:'總利息',v:wan(sim.totalInt),s:fmt(sim.totalInt)+' 元',o:1});
-  k.push({l:'本利合計（總還款）',v:wan(sim.totalPay),s:fmt(sim.totalPay)+' 元'});
+  k.push({l:'自備款（頭期）',v:wan(S.price*1e4-L),s:fmt(S.price*1e4-L)+' 元，另備稅費雜支',o:1});
+  k.push({l:'貸款金額',v:wan(L),s:'貸 '+S.ltv.toFixed(0)+' 成，'+fmt(L)+' 元'});
   if(S.grace>0)k.push({l:'寬限期內每月（只繳利息）',v:fmt(sim.months[0].pay)+' 元',s:`前 ${S.grace} 年；寬限期後月付增加 ${fmt(after.pay-sim.months[0].pay)} 元`});
   if(S.method===2){const last=sim.months[sim.n-1];const dec=after.pay-(sim.months[sim.g+1]||after).pay;k.push({l:'本金平均：月付遞減',v:`${fmt(after.pay)} → ${fmt(last.pay)}`,s:`每月約少 ${fmt(dec)} 元`});}
   if(S.fee>0)k.push({l:'每月住房總支出',v:fmt(payMax+S.fee)+' 元',s:`房貸 ${fmt(payMax)}＋管理費 ${fmt(S.fee)}`});
@@ -432,11 +432,6 @@ function render(){
   else k.push({l:'建議家庭月收入',v:fmt(need)+' 元以上',s:'月付不超過收入三分之一'});
   $('kpis').innerHTML=k.map(x=>`<div class="kpi"><div class="l">${x.l}</div><div class="v${x.o?' o':''}">${x.v}</div><div class="s">${x.s}</div></div>`).join('');
 
-  /* 本金利息比例 */
-  const pp=L/sim.totalPay*100,ip=100-pp;
-  $('ratioBar').innerHTML=`<div style="flex:${pp};background:${C_PRIN}">${pp>=12?pp.toFixed(0)+'%':''}</div><div style="flex:${ip};background:${C_INT}">${ip>=12?ip.toFixed(0)+'%':''}</div>`;
-  $('rPrin').textContent=wan(L);$('rInt').textContent=wan(sim.totalInt)+`（${ip.toFixed(1)}%）`;$('rTot').textContent=wan(sim.totalPay);
-
   drawChart(sim);
   drawCompare();
   drawTable(sim);
@@ -444,35 +439,31 @@ function render(){
   writeURL();
 }
 
-/* 年度長條圖 */
+/* 年末餘額長條圖（單一序列） */
 let lastSim=null;
 function drawChart(sim){
   lastSim=sim;
   const cw=$('chart').clientWidth||720;const W=Math.max(300,Math.round(cw)),H=W<520?210:250,padL=W<520?40:46,padR=8,padT=10,padB=26;const ys=sim.years;
-  const maxV=Math.max(...ys.map(y=>y.pay));const steps=niceSteps(maxV,4);const top=steps[steps.length-1];
+  const L0=S.loan*1e4;const steps=niceSteps(L0,4);const top=steps[steps.length-1];
   const iw=W-padL-padR,ih=H-padT-padB;const bw=iw/ys.length;const barW=Math.max(3,bw*0.68);
   const yv=v=>padT+ih-(v/top)*ih;
-  let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="每年本金與利息長條圖">`;
-  steps.forEach(v=>{s+=`<line x1="${padL}" x2="${W-padR}" y1="${yv(v)}" y2="${yv(v)}" stroke="#e3ebee" stroke-width="1"/><text x="${padL-6}" y="${yv(v)+4}" font-size="11" fill="#9aa9b0" text-anchor="end">${v>=1e4?(v/1e4).toFixed(0)+'萬':v}</text>`;});
+  let svg=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="每年年末貸款餘額長條圖">`;
+  steps.forEach(v=>{svg+=`<line x1="${padL}" x2="${W-padR}" y1="${yv(v)}" y2="${yv(v)}" stroke="#e3ebee" stroke-width="1"/><text x="${padL-6}" y="${yv(v)+4}" font-size="11" fill="#9aa9b0" text-anchor="end">${v>=1e4?Math.round(v/1e4)+'萬':v}</text>`;});
   ys.forEach((y,i)=>{
-    const x=padL+i*bw+(bw-barW)/2;const hP=ih*y.principal/top,hI=ih*y.interest/top;
-    const yP=padT+ih-hP,yI=yP-hI-(hI>0&&hP>0?2:0);
-    s+=`<g class="bar" data-i="${i}">`;
-    if(hP>0)s+=`<rect x="${x}" y="${yP}" width="${barW}" height="${hP}" fill="${C_PRIN}" rx="${hI>0?0:2}"/>`;
-    if(hI>0)s+=`<rect x="${x}" y="${yI}" width="${barW}" height="${hI}" fill="${C_INT}" rx="2"/>`;
-    s+=`<rect class="hit" x="${padL+i*bw}" y="${padT}" width="${bw}" height="${ih}" fill="transparent"/></g>`;
+    const x=padL+i*bw+(bw-barW)/2;const h=ih*y.bal/top;
+    svg+=`<g class="bar" data-i="${i}"><rect x="${x}" y="${padT+ih-h}" width="${barW}" height="${h}" fill="${C_PRIN}" rx="2"/><rect class="hit" x="${padL+i*bw}" y="${padT}" width="${bw}" height="${ih}" fill="transparent"/></g>`;
     const every=ys.length>24?5:ys.length>12?2:1;const last=y.y===ys.length;
-    if(y.y===1||last||(y.y%every===0&&ys.length-y.y>=every/2))s+=`<text x="${x+barW/2}" y="${H-8}" font-size="11" fill="#9aa9b0" text-anchor="${last?'end':'middle'}">${y.y}${last?'年':''}</text>`;
+    if(y.y===1||last||(y.y%every===0&&ys.length-y.y>=every/2))svg+=`<text x="${x+barW/2}" y="${H-8}" font-size="11" fill="#9aa9b0" text-anchor="${last?'end':'middle'}">${y.y}${last?'年':''}</text>`;
   });
-  s+=`</svg>`;
-  const c=$('chart');c.querySelectorAll('svg').forEach(e=>e.remove());c.insertAdjacentHTML('beforeend',s);
-  const tip=$('tip');const svg=c.querySelector('svg');
-  const show=(i,evt)=>{const y=ys[i];const r=svg.getBoundingClientRect();const cx=r.left+(padL+i*bw+bw/2)/W*r.width;const cy=r.top+yv(y.pay)/H*r.height;const cr=c.getBoundingClientRect();
-    tip.innerHTML=`第 ${y.y} 年　年末餘額 <b>${wan(y.bal)}</b><br>本金 <b>${fmt(y.principal)}</b>　利息 <b>${fmt(y.interest)}</b><br>月付 <b>${y.payMin===y.payMax||Math.abs(y.payMax-y.payMin)<1?fmt(y.pay/12):fmt(y.payMax)+'～'+fmt(y.payMin)}</b>`;
+  svg+=`</svg>`;
+  const c=$('chart');c.querySelectorAll('svg').forEach(e=>e.remove());c.insertAdjacentHTML('beforeend',svg);
+  const tip=$('tip');const el=c.querySelector('svg');
+  const show=i=>{const y=ys[i];const r=el.getBoundingClientRect();const cx=r.left+(padL+i*bw+bw/2)/W*r.width;const cy=r.top+yv(y.bal)/H*r.height;const cr=c.getBoundingClientRect();
+    tip.innerHTML=`第 ${y.y} 年年末　還剩 <b>${wan(y.bal)}</b><br>這一年還掉本金 <b>${wan(y.principal)}</b>　已還 <b>${(100-y.bal/L0*100).toFixed(0)}%</b>`;
     tip.style.left=(cx-cr.left)+'px';tip.style.top=(cy-cr.top)+'px';tip.classList.add('show');
-    svg.querySelectorAll('g.bar').forEach((g,j)=>g.style.opacity=j===i?1:.45);};
-  const hide=()=>{tip.classList.remove('show');svg.querySelectorAll('g.bar').forEach(g=>g.style.opacity=1);};
-  svg.querySelectorAll('g.bar').forEach(g=>{const i=+g.dataset.i;g.addEventListener('mouseenter',()=>show(i));g.addEventListener('mouseleave',hide);g.addEventListener('click',e=>{e.stopPropagation();show(i);});});
+    el.querySelectorAll('g.bar').forEach((g,j)=>g.style.opacity=j===i?1:.45);};
+  const hide=()=>{tip.classList.remove('show');el.querySelectorAll('g.bar').forEach(g=>g.style.opacity=1);};
+  el.querySelectorAll('g.bar').forEach(g=>{const i=+g.dataset.i;g.addEventListener('mouseenter',()=>show(i));g.addEventListener('mouseleave',hide);g.addEventListener('click',e=>{e.stopPropagation();show(i);});});
   document.addEventListener('click',hide,{once:false});
 }
 function niceSteps(max,n){const raw=max/n;const p=Math.pow(10,Math.floor(Math.log10(raw||1)));const m=raw/p;const step=(m<=1?1:m<=2?2:m<=2.5?2.5:m<=5?5:10)*p;const out=[];for(let v=0;v<max+step;v+=step)out.push(v);return out;}
@@ -480,20 +471,19 @@ function niceSteps(max,n){const raw=max/n;const p=Math.pow(10,Math.floor(Math.lo
 /* 年限比較 */
 function drawCompare(){
   const L=S.loan*1e4;const list=[...new Set([20,30,40,S.years])].sort((a,b)=>a-b).filter(y=>y>S.grace);
-  let h=`<thead><tr><th>年限</th><th>每月還款${S.grace?'<span class="hide-m">（寬限後）</span>':''}</th><th>總利息</th><th class="hide-m">本利合計</th><th>與目前比</th></tr></thead><tbody>`;
+  let h=`<thead><tr><th>年限</th><th>每月還款${S.grace?'<span class="hide-m">（寬限後）</span>':''}</th><th>與目前比</th><th class="hide-m">建議家庭月收入</th></tr></thead><tbody>`;
   const cur=simulate(L,S.years,S.grace,S.method,S.rate,S.two?S.rate2:null,S.y1);
-  list.forEach(y=>{const sm=simulate(L,y,S.grace,S.method,S.rate,S.two?S.rate2:null,S.y1);const pay=sm.months[sm.g].pay;const d=pay-cur.months[cur.g].pay;const di=sm.totalInt-cur.totalInt;
-    h+=`<tr class="${y===S.years?'cur':''}"><td>${y} 年</td><td>${fmt(pay)} 元</td><td>${wan(sm.totalInt)}</td><td class="hide-m">${wan(sm.totalPay)}</td><td class="cmp">${y===S.years?'—':`月付 ${d>0?'+':'−'}${fmt(Math.abs(d))}<br>利息 ${di>0?'+':'−'}${wan(Math.abs(di))}`}</td></tr>`;});
+  list.forEach(y=>{const sm=simulate(L,y,S.grace,S.method,S.rate,S.two?S.rate2:null,S.y1);const pay=sm.months[sm.g].pay;const d=pay-cur.months[cur.g].pay;
+    h+=`<tr class="${y===S.years?'cur':''}"><td>${y} 年</td><td>${fmt(pay)} 元</td><td class="cmp">${y===S.years?'—':`每月${d>0?'多':'少'} ${fmt(Math.abs(d))} 元`}</td><td class="hide-m">${fmt(pay*3)} 元以上</td></tr>`;});
   $('cmpTbl').innerHTML=h+'</tbody>';
 }
 /* 攤還表 */
 function drawTable(sim){
   let h;
-  if(S.tab==='y'){h=`<thead><tr><th>年</th><th>當年繳款</th><th>其中本金</th><th>其中利息</th><th>年末餘額</th></tr></thead><tbody>`;
-    sim.years.forEach(y=>{h+=`<tr><td>第 ${y.y} 年</td><td>${fmt(y.pay)}</td><td>${fmt(y.principal)}</td><td>${fmt(y.interest)}</td><td>${fmt(y.bal)}</td></tr>`;});
-    h+=`<tr style="font-weight:700;background:var(--teal-l)"><td>合計</td><td>${fmt(sim.totalPay)}</td><td>${fmt(S.loan*1e4)}</td><td>${fmt(sim.totalInt)}</td><td>0</td></tr>`;}
-  else{h=`<thead><tr><th>期數</th><th>月付</th><th>本金</th><th>利息</th><th>剩餘本金</th></tr></thead><tbody>`;
-    sim.months.forEach(m=>{h+=`<tr${m.m%12===0?' style="border-bottom:2px solid #c9d8dd"':''}><td>第 ${m.m} 期<span style="color:var(--faint);font-size:11px"> ${Math.ceil(m.m/12)}年${((m.m-1)%12)+1}月</span></td><td>${fmt(m.pay)}</td><td>${fmt(m.principal)}</td><td>${fmt(m.interest)}</td><td>${fmt(m.bal)}</td></tr>`;});}
+  if(S.tab==='y'){h=`<thead><tr><th>年</th><th>當年繳款</th><th>還掉本金</th><th>年末餘額</th></tr></thead><tbody>`;
+    sim.years.forEach(y=>{h+=`<tr><td>第 ${y.y} 年</td><td>${fmt(y.pay)}</td><td>${fmt(y.principal)}</td><td>${fmt(y.bal)}</td></tr>`;});}
+  else{h=`<thead><tr><th>期數</th><th>月付</th><th>還掉本金</th><th>剩餘本金</th></tr></thead><tbody>`;
+    sim.months.forEach(m=>{h+=`<tr${m.m%12===0?' style="border-bottom:2px solid #c9d8dd"':''}><td>第 ${m.m} 期<span style="color:var(--faint);font-size:11px"> ${Math.ceil(m.m/12)}年${((m.m-1)%12)+1}月</span></td><td>${fmt(m.pay)}</td><td>${fmt(m.principal)}</td><td>${fmt(m.bal)}</td></tr>`;});}
   $('amTbl').innerHTML=h+'</tbody>';
 }
 
@@ -514,7 +504,7 @@ function readURL(){
   if(S.two||S.fee||S.income)$('adv').open=true;lastEdit='loan';
 }
 function toast(t){const e=$('toast');e.textContent=t;e.classList.add('show');clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove('show'),1800);}
-function shareText(){const L=S.loan*1e4;return `【房貸試算】總價 ${wan(S.price*1e4)}、貸 ${S.ltv.toFixed(0)} 成 ${wan(L)}、${S.years} 年、利率 ${S.rate}%${S.grace?`、寬限 ${S.grace} 年`:''}\n每月還款約 ${$('heroAmt').textContent} 元\n完整試算：`;}
+function shareText(){const L=S.loan*1e4;return "【房貸試算】總價 "+wan(S.price*1e4)+"、自備款 "+wan(S.price*1e4-L)+"、貸 "+S.ltv.toFixed(0)+" 成 "+wan(L)+"、"+S.years+" 年、利率 "+S.rate+"%"+(S.grace?"、寬限 "+S.grace+" 年":"")+"\n每月還款約 "+$("heroAmt").textContent+" 元\n完整試算：";}
 
 /* ---------- 事件 ---------- */
 ['price','ltv','loan','years','rate','y1','rate2','fee','income'].forEach(id=>{$(id).addEventListener('input',()=>{if(id==='loan')lastEdit='loan';else if(id==='ltv'||id==='price')lastEdit='ltv';render();});});
@@ -528,9 +518,7 @@ $('presets').addEventListener('click',e=>{const b=e.target.closest('.chip');if(!
   else{S.qa=false;$('years').value=p==='y20'?20:30;S.grace=0;}
   render();});
 document.querySelector('.tabs').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;S.tab=b.dataset.t;[...b.parentNode.children].forEach(x=>x.classList.toggle('on',x===b));render();});
-$('copyBtn').addEventListener('click',async()=>{const u=location.href;try{await navigator.clipboard.writeText(u);toast('已複製，貼到 LINE 給客戶即可');}catch(e){prompt('複製這個連結',u);}});
 $('lineBtn').addEventListener('click',()=>{window.open('https://line.me/R/share?text='+encodeURIComponent(shareText()+location.href),'_blank');});
-$('printBtn').addEventListener('click',()=>window.print());
 $('resetBtn').addEventListener('click',()=>{history.replaceState(null,'',location.pathname);location.reload();});
 
 let rt;window.addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>{if(lastSim)drawChart(lastSim);},120);});
