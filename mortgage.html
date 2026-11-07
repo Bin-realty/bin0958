@@ -398,7 +398,7 @@ function syncInputs(){
   [...$('yearsSeg').querySelectorAll('button')].forEach(b=>b.classList.toggle('on',+b.dataset.v===S.years));
   [...$('graceSeg').querySelectorAll('button')].forEach(b=>b.classList.toggle('on',+b.dataset.v===S.grace));
   [...$('methodSeg').querySelectorAll('button')].forEach(b=>b.classList.toggle('on',+b.dataset.v===S.method));
-  $('methodNote').textContent=S.method===1?'每月繳固定金額，前期利息多、後期本金多；最常見、現金流好規劃。':'每月還固定本金，利息逐月遞減；月付由高到低，總利息比本息平均少。';
+  $('methodNote').textContent=S.method===1?'每月繳固定金額，前期利息多、後期本金多；最常見、現金流好規劃。':'每月還固定本金；月付由高到低，一開始繳得多、越後面越輕鬆。';
   $('twoRow').style.display=S.two?'grid':'none';
   $('qaNote').style.display=S.qa?'block':'none';
   [...$('presets').querySelectorAll('.chip')].forEach(c=>c.classList.toggle('on',(c.dataset.p==='qa'&&S.qa)||(c.dataset.p==='y20'&&!S.qa&&S.years===20&&S.grace===0)||(c.dataset.p==='y30'&&!S.qa&&S.years===30&&S.grace===0)));
