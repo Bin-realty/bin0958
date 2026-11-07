@@ -2,7 +2,7 @@
 
 網址：https://bin-realty.github.io/bin0958/
 
-- 純靜態、單檔 HTML、無 build；push main 即上線（Pages）。
+- 純靜態、單檔 HTML、無 build。**上線方式：Pages 目前吃 `gh-pages` 分支**（GitHub 自動啟用的），所以每次改完要 `git push origin main` 再 `git push origin main:gh-pages`，兩個都推才會更新。（聖斌若哪天在 Settings → Pages 把來源改成 main，就不用再推 gh-pages。）
 - 頁面：index.html 品牌首頁｜listing.html?code=L001 物件頁｜mortgage.html 房貸試算｜needs.html 找房需求單｜sites.html 網站總覽。
 - 物件資料從 threads-poster 的 data/listings.json 直接讀（raw.githubusercontent），照片讀 threads-poster listings/<code小寫>/album/NN.jpg；本 repo 不存物件資料。
 - 公開 repo：絕不放客戶、屋主、電話、門牌號、底價、內部紀錄。聯絡資料只放名片上的公開資訊。
