@@ -217,7 +217,7 @@ footer.legal a{color:var(--faint)}
 
 /* 進場動畫 */
 .fx{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
-.fx.in{opacity:1;transform:none}
+.fx.fx-in{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){.fx{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
 </style>
 </head>
@@ -330,9 +330,9 @@ footer.legal a{color:var(--faint)}
 (function(){
 'use strict';
 /* 進場動畫 */
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('fx-in');io.unobserve(e.target);}}),{threshold:.12});
 document.querySelectorAll('.fx').forEach(el=>io.observe(el));
-setTimeout(()=>document.querySelectorAll('.fx').forEach(el=>el.classList.add('in')),1200);
+setTimeout(()=>document.querySelectorAll('.fx').forEach(el=>el.classList.add('fx-in')),1200);
 
 /* 影片清單（data/videos.json，每天自動更新） */
 const vb=document.getElementById("vids");
@@ -341,7 +341,7 @@ fetch("data/videos.json",{cache:"no-store"}).then(r=>r.json()).then(j=>{
   if(j.channel&&j.channel.name)document.getElementById("chName").textContent=j.channel.name;
   if(j.channel&&j.channel.avatar){const im=document.querySelector("#ch img");if(im.src!==j.channel.avatar)im.src=j.channel.avatar;}
   if(!vs.length){vb.innerHTML='<div class="vids-empty">影片陸續上傳中，先到 <a href="https://www.youtube.com/@Bin0958" target="_blank" rel="noopener">頻道</a> 逛逛。</div>';return;}
-  vb.innerHTML=vs.map(v=>`<a class="vd fx in" href="https://www.youtube.com/watch?v=${esc(v.id)}" target="_blank" rel="noopener"><div class="th"><img src="https://i.ytimg.com/vi/${esc(v.id)}/hqdefault.jpg" alt="" loading="lazy"><i></i></div><div class="bd"><h3>${esc(v.title)}</h3><span>${esc(v.published||"")}</span></div></a>`).join("");
+  vb.innerHTML=vs.map(v=>`<a class="vd fx fx-in" href="https://www.youtube.com/watch?v=${esc(v.id)}" target="_blank" rel="noopener"><div class="th"><img src="https://i.ytimg.com/vi/${esc(v.id)}/hqdefault.jpg" alt="" loading="lazy"><i></i></div><div class="bd"><h3>${esc(v.title)}</h3><span>${esc(v.published||"")}</span></div></a>`).join("");
 }).catch(()=>{vb.innerHTML='<div class="vids-empty">到 <a href="https://www.youtube.com/@Bin0958" target="_blank" rel="noopener">YouTube 頻道</a> 看最新影片。</div>';});
 
 /* 存到通訊錄 */
