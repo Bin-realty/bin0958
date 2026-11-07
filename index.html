@@ -212,6 +212,9 @@ section.alt{background:#fff}
 @media (max-width:860px){.vcard{grid-template-columns:1fr;gap:16px;padding:18px}.info{border-left:0;padding-left:0;border-top:1px solid var(--line);padding-top:14px}.qr{flex-direction:row;justify-content:flex-start;text-align:left;gap:14px;border-top:1px solid var(--line);padding-top:14px}.qr img{width:104px;height:104px}}
 
 footer.legal{padding:22px 0 110px;font-size:12px;color:var(--faint);text-align:center;line-height:1.7}
+.views{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 16px;font-size:13px;color:var(--muted);margin-bottom:12px;box-shadow:var(--shadow)}
+.views b{color:var(--teal);font-size:16px;font-variant-numeric:tabular-nums;letter-spacing:.5px}
+.views i{width:8px;height:8px;border-radius:50%;background:#2ecc71;box-shadow:0 0 0 3px rgba(46,204,113,.2)}
 footer.legal a{color:var(--faint)}
 
 /* 手機底部固定 */
@@ -324,6 +327,7 @@ footer.legal a{color:var(--faint)}
 </section>
 
 <footer class="legal">
+ <div class="views"><i></i>累積瀏覽 <b id="views">1,016</b> 人</div><br>
  尚峰不動產有限公司｜經紀人：林建宏 (103)00667｜營業員：蘇聖斌 (111)416424<br>
  © 蘇聖斌　<a href="sites.html">網站總覽</a>
 </footer>
@@ -347,6 +351,12 @@ fetch("data/videos.json",{cache:"no-store"}).then(r=>r.json()).then(j=>{
   if(!vs.length){vb.innerHTML='<div class="vids-empty">影片陸續上傳中，先到 <a href="https://www.youtube.com/@Bin0958" target="_blank" rel="noopener">頻道</a> 逛逛。</div>';return;}
   vb.innerHTML=vs.map(v=>`<a class="vd fx fx-in" href="https://www.youtube.com/watch?v=${esc(v.id)}" target="_blank" rel="noopener"><div class="th"><img src="https://i.ytimg.com/vi/${esc(v.id)}/hqdefault.jpg" alt="" loading="lazy"><i></i></div><div class="bd"><h3>${esc(v.title)}</h3><span>${esc(v.published||"")}</span></div></a>`).join("");
 }).catch(()=>{vb.innerHTML='<div class="vids-empty">到 <a href="https://www.youtube.com/@Bin0958" target="_blank" rel="noopener">YouTube 頻道</a> 看最新影片。</div>';});
+
+/* 累積瀏覽人數：底數 1016 ＋ 真實來訪（同一次瀏覽只計一次） */
+(function(){const BASE=1016,API='https://abacus.jasoncameron.dev',NS='bin0958-site',KEY='home';const el=document.getElementById('views');
+  let hit=false;try{hit=sessionStorage.getItem('viewed')==='1';}catch(e){}
+  fetch(API+(hit?'/get/':'/hit/')+NS+'/'+KEY,{cache:'no-store'}).then(r=>r.json()).then(j=>{if(typeof j.value==='number'){el.textContent=(BASE+j.value).toLocaleString('zh-TW');try{sessionStorage.setItem('viewed','1');}catch(e){}}}).catch(()=>{});
+})();
 
 /* 存到通訊錄 */
 document.getElementById('vcf').addEventListener('click',()=>{
