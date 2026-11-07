@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>網站總覽｜蘇聖斌</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f4c5c'/%3E%3Cpath d='M32 14 12 32h6v18h12V38h4v12h12V32h6z' fill='%23e8731a'/%3E%3C/svg%3E">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<style>
+:root{--teal:#0f4c5c;--teal-l:#e6f0f3;--orange:#e8731a;--bg:#f3f6f7;--ink:#1f2a30;--muted:#5f6f77;--faint:#9aa9b0;--line:#dbe5e9;--r:16px;--shadow:0 1px 2px rgba(15,76,92,.06),0 10px 28px rgba(15,76,92,.09)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","微軟正黑體",system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;font-size:15px}
+a{color:var(--teal)}
+.in{max-width:1000px;margin:0 auto;padding:0 16px}
+.top{background:#0a3744;color:#fff}.top .in{display:flex;align-items:center;justify-content:space-between;height:56px}
+.top a{color:#fff;text-decoration:none;font-weight:900;letter-spacing:1px}.top a.back{font-weight:400;font-size:13.5px;opacity:.85}
+h1{font-size:26px;font-weight:900;color:var(--teal);margin:26px 0 4px}
+.lead{color:var(--muted);margin-bottom:20px;font-size:14px}
+h2{font-size:15px;color:var(--orange);letter-spacing:2px;margin:26px 0 10px;font-weight:700}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.s{background:#fff;border-radius:var(--r);box-shadow:var(--shadow);padding:16px;display:grid;grid-template-columns:1fr 96px;gap:14px;align-items:center}
+.s h3{font-size:17px;color:var(--teal)}
+.s p{font-size:13px;color:var(--muted);margin-top:2px;line-height:1.5}
+.s .u{font-size:12px;color:var(--faint);word-break:break-all;margin-top:6px}
+.s .row{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;padding:7px 12px;border-radius:999px;font-size:13px;font-weight:700;text-decoration:none;border:1.5px solid var(--teal);color:var(--teal);background:#fff;cursor:pointer;font-family:inherit}
+.btn.p{background:var(--teal);color:#fff}
+.qr{width:96px;height:96px;display:flex;align-items:center;justify-content:center;background:#fff}
+.qr svg,.qr img{width:96px;height:96px}
+.tag{display:inline-block;font-size:11px;background:var(--teal-l);color:var(--teal);border-radius:999px;padding:1px 8px;margin-left:6px;vertical-align:middle;font-weight:700}
+.tag.i{background:#fdecd9;color:#b4540c}
+.toast{position:fixed;left:50%;bottom:30px;transform:translateX(-50%);background:#1f2a30;color:#fff;padding:10px 16px;border-radius:999px;font-size:14px;opacity:0;transition:.2s;pointer-events:none}
+.toast.show{opacity:1}
+footer{padding:30px 0;font-size:12px;color:var(--faint);text-align:center}
+@media (max-width:700px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="top"><div class="in"><a href="./">蘇聖斌｜網站總覽</a><a class="back" href="./">‹ 品牌首頁</a></div></div>
+<main class="in">
+ <h1>我的所有網站</h1>
+ <p class="lead">給客戶的連結都在這裡，每個都有 QR 可以直接截圖貼名片或傳 LINE。</p>
+ <div id="pub"></div>
+ <div id="int"></div>
+</main>
+<footer>© 蘇聖斌</footer>
+<div class="toast" id="toast"></div>
+<script>
+(function(){
+const BASE='https://bin-realty.github.io/bin0958/';
+const SITES={
+ '給客戶看的':[
+  {t:'品牌首頁',d:'認識聖斌：服務、在售物件、工具、影片、聯絡方式。名片 QR、社群簡介都放這個。',u:BASE},
+  {t:'房貸試算',d:'每月還款、總利息、寬限期、年限比較。幫客戶填好條件後「複製試算連結」傳給他。',u:BASE+'mortgage.html'},
+  {t:'找房需求單',d:'客戶花 3 分鐘填需求，一鍵傳到官方 LINE。',u:BASE+'needs.html'},
+  {t:'物件頁（範例 L001）',d:'每一戶一頁：照片、規格、算房貸、LINE 詢問。網址把 code 換成物件編號。',u:BASE+'listing.html?code=L001'},
+  {t:'首購流程表 PDF',d:'出價斡旋到交屋兩頁流程，給首購客戶。',u:BASE+'assets/first-home-flow.pdf'},
+  {t:'Threads',d:'物件貼文主陣地。',u:'https://www.threads.com/@a0958810178'},
+  {t:'LINE 官方帳號',d:'客戶加好友、需求單送出的落點。',u:'https://lin.ee/tcIH5J0'},
+ ],
+ '內部工具（客戶不用看）':[
+  {t:'追蹤台',d:'客戶、庫存、行程、Threads 文案。要登入 token 才能寫。',u:'https://bin-realty.github.io/threads-poster/tracker.html',i:1},
+  {t:'脆 bin',d:'Threads 排程發文。',u:'https://bin-realty.github.io/threads-poster/',i:1},
+  {t:'找房需求單（舊 artifact 版）',d:'claude.ai 上的舊版，已改由 needs.html 取代，留著備用。',u:'https://claude.ai/artifact/YGSiPQwSVWomQWPriek7Si',i:1},
+  {t:'聖斌找房 快速單（artifact）',d:'11/4 做的精簡版需求單。',u:'https://claude.ai/artifact/KKcZYNUDuaj9TAyYg3AdAk',i:1},
+ ]
+};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function qrSvg(u){try{const q=qrcode(0,'M');q.addData(u);q.make();return q.createSvgTag({cellSize:3,margin:2,scalable:true});}catch(e){return '';}}
+let html='';
+Object.entries(SITES).forEach(([grp,list])=>{html+=`<h2>${esc(grp)}</h2><div class="grid">`+list.map(s=>`<div class="s"><div><h3>${esc(s.t)}${s.i?'<span class="tag i">內部</span>':'<span class="tag">公開</span>'}</h3><p>${esc(s.d)}</p><div class="u">${esc(s.u)}</div><div class="row"><a class="btn p" href="${esc(s.u)}" target="_blank" rel="noopener">開啟</a><button class="btn" data-u="${esc(s.u)}">複製連結</button></div></div><div class="qr">${qrSvg(s.u)}</div></div>`).join('')+'</div>';});
+document.getElementById('pub').innerHTML=html;
+document.addEventListener('click',async e=>{const b=e.target.closest('button[data-u]');if(!b)return;try{await navigator.clipboard.writeText(b.dataset.u);}catch(x){prompt('複製這個連結',b.dataset.u);}const t=document.getElementById('toast');t.textContent='已複製';t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1500);});
+})();
+</script>
+</body>
+</html>

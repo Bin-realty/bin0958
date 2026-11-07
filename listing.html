@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>物件介紹｜蘇聖斌</title>
+<meta name="description" content="蘇聖斌在售物件：完整規格、照片、房貸試算，一鍵 LINE 詢問。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f4c5c'/%3E%3Cpath d='M32 14 12 32h6v18h12V38h4v12h12V32h6z' fill='%23e8731a'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--teal:#0f4c5c;--teal-d:#0a3744;--teal-l:#e6f0f3;--orange:#e8731a;--orange-l:#fff3e8;--bg:#f3f6f7;--card:#fff;--ink:#1f2a30;--muted:#5f6f77;--faint:#9aa9b0;--line:#dbe5e9;--r:16px;--shadow:0 1px 2px rgba(15,76,92,.06),0 10px 28px rgba(15,76,92,.09)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","微軟正黑體",system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;font-size:15.5px;overflow-x:hidden}
+a{color:var(--teal)}img{display:block;max-width:100%}
+.in{max-width:1000px;margin:0 auto;padding:0 18px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 20px;border-radius:999px;font-weight:700;font-size:15px;text-decoration:none;border:2px solid transparent;transition:.18s;cursor:pointer;line-height:1.2;white-space:nowrap}
+.btn.p{background:var(--orange);color:#fff}.btn.p:hover{background:#d2640f}
+.btn.t{background:#fff;color:var(--teal);border-color:var(--teal)}.btn.t:hover{background:var(--teal-l)}
+.btn.line{background:#06c755;color:#fff}.btn.line:hover{background:#05b04b}
+.btn.sm{padding:9px 14px;font-size:13.5px}
+.top{position:sticky;top:0;z-index:30;background:rgba(10,55,68,.92);backdrop-filter:blur(10px);color:#fff}
+.top .in{display:flex;align-items:center;justify-content:space-between;height:56px;gap:12px}
+.top .logo{font-weight:900;letter-spacing:1px;font-size:16px;text-decoration:none;color:#fff;display:flex;align-items:center;gap:8px}
+.top .logo i{width:26px;height:26px;border-radius:7px;background:var(--orange);display:inline-flex;align-items:center;justify-content:center}
+.top .back{color:#fff;text-decoration:none;font-size:13.5px;opacity:.85}
+main{padding:22px 0 120px}
+.gal{position:relative;border-radius:var(--r);overflow:hidden;background:linear-gradient(135deg,var(--teal),#1f7f96);box-shadow:var(--shadow);aspect-ratio:4/3;max-height:560px}
+.gal .track{position:relative;z-index:1;display:flex;height:100%;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
+.gal .track::-webkit-scrollbar{display:none}
+.gal .track img{flex:none;width:100%;height:100%;object-fit:cover;scroll-snap-align:start}
+.gal .nm{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:32px;letter-spacing:3px;opacity:.9}
+.gal .cnt{z-index:2;position:absolute;right:12px;bottom:12px;background:rgba(0,0,0,.55);color:#fff;font-size:12.5px;padding:4px 10px;border-radius:999px}
+.gal .nav{z-index:2;position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.9);border:0;cursor:pointer;font-size:20px;color:var(--teal);display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.gal .nav.l{left:10px}.gal .nav.r{right:10px}
+.thumbs{display:flex;gap:8px;margin-top:10px;overflow-x:auto;scrollbar-width:thin;padding-bottom:4px}
+.thumbs img{width:84px;height:64px;object-fit:cover;border-radius:8px;flex:none;cursor:pointer;border:2px solid transparent;opacity:.85}
+.thumbs img.on{border-color:var(--orange);opacity:1}
+.head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin:22px 0 14px}
+.head h1{font-size:30px;font-weight:900;color:var(--teal);letter-spacing:1px;line-height:1.2}
+.head .lay{font-size:14px;color:var(--muted);margin-top:4px}
+.head .ask{font-size:34px;font-weight:900;color:var(--orange);font-variant-numeric:tabular-nums;line-height:1}
+.head .ask small{font-size:13px;color:var(--muted);font-weight:500;display:block;margin-top:4px;text-align:right}
+.cta{display:flex;gap:10px;flex-wrap:wrap;margin:6px 0 22px}
+.grid{display:grid;grid-template-columns:1.2fr .8fr;gap:16px;align-items:start}
+.card{background:#fff;border-radius:var(--r);box-shadow:var(--shadow);padding:20px}
+.card h2{font-size:17px;color:var(--teal);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.card h2::before{content:"";width:4px;height:18px;background:var(--orange);border-radius:2px}
+.spec{display:grid;grid-template-columns:1fr 1fr;gap:0 18px}
+.spec div{display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px solid var(--line);font-size:14.5px}
+.spec dt{color:var(--muted);flex:none}.spec dd{font-weight:700;text-align:right;font-variant-numeric:tabular-nums}
+.agent{display:flex;gap:14px;align-items:center}
+.agent img{width:72px;height:72px;border-radius:16px;object-fit:cover;object-position:top}
+.agent b{font-size:18px;color:var(--teal);display:block}
+.agent span{font-size:13px;color:var(--muted);display:block;line-height:1.5}
+.agent .row{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.calc{margin-top:14px;background:var(--teal-l);border-radius:12px;padding:12px 14px;font-size:14px}
+.calc b{color:var(--teal);font-size:20px;font-variant-numeric:tabular-nums}
+.calc small{color:var(--muted);display:block;font-size:12px;margin-top:2px}
+.others{margin-top:26px}
+.others h2{font-size:20px;color:var(--teal);font-weight:900;margin-bottom:12px}
+.lst{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.lc{background:#fff;border-radius:14px;overflow:hidden;box-shadow:var(--shadow);text-decoration:none;color:var(--ink);display:flex;flex-direction:column}
+.lc .ph{aspect-ratio:4/3;background:linear-gradient(135deg,var(--teal),#1f7f96);position:relative;overflow:hidden}
+.lc .ph img{width:100%;height:100%;object-fit:cover;position:relative;z-index:1}
+.lc .ph .nm{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:22px;letter-spacing:2px;opacity:.9}
+.lc .bd{padding:12px 14px}.lc h3{font-size:16px;color:var(--teal)}.lc .ask{color:var(--orange);font-weight:900;font-size:18px}.lc .sp{font-size:12.5px;color:var(--muted)}
+.empty{background:#fff;border-radius:var(--r);padding:40px 20px;text-align:center;color:var(--muted);box-shadow:var(--shadow)}
+.sticky{position:fixed;left:0;right:0;bottom:0;z-index:25;display:none;gap:10px;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-top:1px solid var(--line);box-shadow:0 -8px 24px rgba(15,76,92,.12)}
+.sticky .btn{flex:1}
+footer.legal{padding:22px 0;font-size:12px;color:var(--faint);text-align:center;line-height:1.7}
+@media (max-width:760px){.grid{grid-template-columns:1fr}.spec{grid-template-columns:1fr}.head h1{font-size:25px}.head .ask{font-size:28px}.sticky{display:flex}.lst{grid-template-columns:1fr 1fr}.gal .nav{display:none}}
+@media (max-width:460px){.lst{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="top"><div class="in"><a class="logo" href="./"><i><svg width="16" height="16" viewBox="0 0 64 64"><path d="M32 14 12 32h6v18h12V38h4v12h12V32h6z" fill="#fff"/></svg></i>蘇聖斌</a><a class="back" href="./#listings">‹ 全部物件</a></div></div>
+<main class="in" id="main"><div class="empty">載入中…</div></main>
+<footer class="legal">尚峰不動產有限公司｜經紀人：林建宏 (103)00667｜營業員：蘇聖斌 (111)416424<br>本頁資料以現場及不動產說明書為準。</footer>
+<div class="sticky" id="sticky" hidden></div>
+<script>
+(function(){
+'use strict';
+const RAW='https://raw.githubusercontent.com/Bin-realty/threads-poster/main/';
+const LINE='@a0888';
+const esc=s=>String(s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const parseSpec=spec=>{const o=[];String(spec||'').split('\n').forEach(l=>{const m=l.replace(/^┃/,'').split('：');if(m.length>=2)o.push([m[0].trim(),m.slice(1).join('：').trim()]);});return o;};
+const code=(new URLSearchParams(location.search).get('code')||'').toUpperCase();
+const main=document.getElementById('main');
+fetch(RAW+'data/listings.json',{cache:'no-store'}).then(r=>r.json()).then(j=>{
+  const arr=(j.listings||[]).filter(l=>l.code&&l.name);
+  const L=arr.find(l=>l.code.toUpperCase()===code);
+  if(!L){main.innerHTML=`<div class="empty">找不到這個物件，可能已經成交或下架。<br><br><a class="btn p" href="./#listings">看其他在售物件</a></div>`;return;}
+  document.title=`${L.name}｜${L.ask}｜蘇聖斌`;
+  const spec=parseSpec(L.spec);const get=k=>{const x=spec.find(s=>s[0]===k);return x?x[1]:'';};
+  const dir=RAW+'listings/'+L.code.toLowerCase()+'/album/';
+  const askWan=+L.askWan||0;const loan=Math.round(askWan*0.8);
+  const r=0.02185/12,n=360;const pmt=loan>0?Math.round(loan*1e4*r/(1-Math.pow(1+r,-n))):0;
+  const msg=encodeURIComponent(`聖斌你好，我在網站看到「${L.name} ${L.ask}（${L.layout||''}）」，想了解這間，方便聯絡我嗎？`);
+  const lineUrl=`https://line.me/R/oaMessage/${LINE}/?${msg}`;
+  main.innerHTML=`
+   <div class="gal" id="gal"><div class="nm">${esc(L.name)}</div><div class="track" id="track"></div><button class="nav l" id="prev" aria-label="上一張">‹</button><button class="nav r" id="next" aria-label="下一張">›</button><div class="cnt" id="cnt" hidden></div></div>
+   <div class="thumbs" id="thumbs"></div>
+   <div class="head"><div><h1>${esc(L.name)}</h1><div class="lay">${esc(L.layout||'')}${get('地址')?'・'+esc(get('地址')):''}</div></div><div class="ask">${esc(L.ask)}<small>${esc(get('建坪')||'')}</small></div></div>
+   <div class="cta"><a class="btn line" href="${lineUrl}" target="_blank" rel="noopener">用 LINE 問這間</a><a class="btn t" href="mortgage.html?p=${askWan}&a=${loan}&y=30&r=2.185">算這間的房貸</a>${L.photos?`<a class="btn t" href="${esc(L.photos)}" target="_blank" rel="noopener">完整相簿</a>`:''}</div>
+   <div class="grid">
+    <div class="card"><h2>物件規格</h2><dl class="spec">${spec.map(s=>`<div><dt>${esc(s[0])}</dt><dd>${esc(s[1])}</dd></div>`).join('')}</dl></div>
+    <div>
+     <div class="card"><h2>聯絡聖斌</h2><div class="agent"><img src="assets/portrait.jpg" alt="蘇聖斌"><div><b>蘇聖斌</b><span>專案經理・台灣房屋 松竹十一期特許加盟店</span><span>0958-810-178（LINE ID 同號）</span></div></div>
+      <div class="agent"><div class="row"><a class="btn p sm" href="tel:0958810178">📞 撥電話</a><a class="btn line sm" href="${lineUrl}" target="_blank" rel="noopener">LINE 詢問</a></div></div>
+      ${pmt?`<div class="calc">貸 8 成、30 年、利率 2.185% 試算<br><b>${pmt.toLocaleString('zh-TW')}</b> 元／月<small>自備約 ${(askWan-loan).toLocaleString('zh-TW')} 萬。點「算這間的房貸」可改成數、年限、寬限期。</small></div>`:''}
+     </div>
+    </div>
+   </div>
+   <div class="others"><h2>其他在售物件</h2><div class="lst">${arr.filter(x=>x.code!==L.code).map(x=>{const s=parseSpec(x.spec);const g=k=>{const y=s.find(z=>z[0]===k);return y?y[1]:'';};return `<a class="lc" href="listing.html?code=${esc(x.code)}"><div class="ph"><div class="nm">${esc(x.name)}</div><img src="${RAW}listings/${x.code.toLowerCase()}/album/01.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="bd"><h3>${esc(x.name)}</h3><div class="ask">${esc(x.ask)}</div><div class="sp">${esc(x.layout||'')}${g('建坪')?'・'+esc(g('建坪')):''}</div></div></a>`;}).join('')||'<div class="empty">目前沒有其他物件</div>'}</div></div>`;
+  const st=document.getElementById('sticky');st.hidden=false;st.innerHTML=`<a class="btn t" href="tel:0958810178">📞 撥電話</a><a class="btn line" href="${lineUrl}" target="_blank" rel="noopener">LINE 問這間</a>`;
+  /* 照片：從 01.jpg 往後載，載不到就停 */
+  const track=document.getElementById('track'),thumbs=document.getElementById('thumbs'),cnt=document.getElementById('cnt');
+  let imgs=[],cur=0;
+  function show(i){if(!imgs.length)return;cur=(i+imgs.length)%imgs.length;track.scrollTo({left:cur*track.clientWidth,behavior:'smooth'});thumbs.querySelectorAll('img').forEach((t,j)=>t.classList.toggle('on',j===cur));cnt.textContent=(cur+1)+' / '+imgs.length;}
+  function load(i){if(i>24)return;const u=dir+String(i).padStart(2,'0')+'.jpg';const im=new Image();im.onload=()=>{imgs.push(u);const a=document.createElement('img');a.src=u;a.alt=L.name+' 照片 '+i;a.loading=i>2?'lazy':'eager';track.appendChild(a);const t=document.createElement('img');t.src=u;t.alt='';t.addEventListener('click',()=>show(imgs.indexOf(u)));thumbs.appendChild(t);cnt.hidden=false;cnt.textContent=(cur+1)+' / '+imgs.length;if(imgs.length===1)t.classList.add('on');load(i+1);};im.onerror=()=>{if(!imgs.length){thumbs.remove();document.getElementById('prev').remove();document.getElementById('next').remove();}};im.src=u;}
+  load(1);
+  document.getElementById('prev').addEventListener('click',()=>show(cur-1));document.getElementById('next').addEventListener('click',()=>show(cur+1));
+  track.addEventListener('scroll',()=>{const i=Math.round(track.scrollLeft/track.clientWidth);if(i!==cur&&imgs.length){cur=i;thumbs.querySelectorAll('img').forEach((t,j)=>t.classList.toggle('on',j===cur));cnt.textContent=(cur+1)+' / '+imgs.length;}},{passive:true});
+}).catch(()=>{main.innerHTML=`<div class="empty">資料暫時載入不了，請直接 <a href="https://line.me/R/ti/p/${LINE}">LINE 聖斌</a>。</div>`;});
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,730 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>找房需求單｜蘇聖斌</title>
+<meta name="description" content="花 3 分鐘填好買房需求，一鍵傳 LINE 給聖斌，之後聯絡直接談重點。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f4c5c'/%3E%3Cpath d='M32 14 12 32h6v18h12V38h4v12h12V32h6z' fill='%23e8731a'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap">
+<style>
+:root{
+  --bg:#f3f6f7; --surface:#ffffff; --surface-2:#eaf0f2; --ink:#1f2a30; --muted:#5f6f77; --line:#dbe5e9;
+  --accent:#0f4c5c; --accent-ink:#ffffff; --accent-soft:#e6f0f3;
+  --brass:#e8731a; --brass-soft:#fff3e8;
+  --danger:#c0392b; --danger-soft:#fbe9e7;
+  --chip:#eaf0f2; --chip-ink:#1f2a30; --chip-on:#0f4c5c; --chip-on-ink:#ffffff;
+  --f-body:"Noto Sans TC","PingFang TC","Microsoft JhengHei","微軟正黑體",system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.65;margin:0;padding-inline:16px;padding-block:0 130px}
+.wrap{max-width:560px;margin:0 auto;min-width:0}
+.topbar{display:flex;justify-content:space-between;align-items:center;padding:14px 0 0;font-size:13px}
+.topbar a{color:var(--accent);text-decoration:none;font-weight:700}
+header{padding-block:18px 20px}
+.eyebrow{font-size:12px;letter-spacing:.16em;color:var(--brass);font-weight:700}
+h1{font-size:28px;line-height:1.3;color:var(--accent);margin:8px 0 10px;font-weight:900;text-wrap:balance}
+.intro{color:var(--muted);margin:0 0 16px}
+.agent{display:grid;gap:3px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px;font-size:13.5px;border-left:5px solid var(--brass)}
+.agent .name{font-size:17px;color:var(--accent);font-weight:900}
+.agent .role{color:var(--muted)}
+.agent .row{display:flex;gap:8px;flex-wrap:wrap;align-items:baseline;color:var(--ink)}
+.agent .row b{color:var(--muted);font-weight:500;font-size:12.5px}
+form{display:grid;gap:14px}
+section.grp{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px 17px;display:grid;gap:19px;min-width:0}
+.grp h2{font-size:18px;color:var(--accent);margin:0;display:flex;align-items:baseline;gap:8px;font-weight:900}
+.grp h2 small{font-size:12px;color:var(--muted);font-weight:400}
+.q{display:grid;gap:8px;min-width:0}
+.q>.lbl{font-weight:700;font-size:14.5px}
+.q .hint{font-weight:400;color:var(--muted);font-size:12.5px;margin-left:2px}
+.req{color:var(--danger);margin-left:2px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips input{position:absolute;opacity:0;pointer-events:none}
+.chips label{background:var(--chip);color:var(--chip-ink);border:1px solid transparent;border-radius:999px;padding:7px 14px;font-size:13.5px;cursor:pointer;user-select:none;transition:background .15s}
+.chips input:checked+label{background:var(--chip-on);color:var(--chip-on-ink);font-weight:600}
+.chips input:focus-visible+label{outline:2px solid var(--brass);outline-offset:2px}
+input[type=text],input[type=tel],input[type=number],textarea{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+textarea{min-height:72px;resize:vertical}
+input:focus-visible,textarea:focus-visible{outline:2px solid var(--brass);outline-offset:1px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:420px){.row2{grid-template-columns:1fr}}
+.note{background:var(--brass-soft);border:1px solid var(--brass);border-radius:10px;padding:10px 12px;font-size:12.5px;color:var(--ink);line-height:1.55}
+.areagrp{display:grid;gap:6px}
+.sub{font-size:12px;color:var(--muted);font-weight:700;letter-spacing:.06em}
+.err{color:var(--danger);font-size:12.5px}
+.calc{background:linear-gradient(160deg,var(--accent-soft),var(--surface));border:1px solid var(--line);border-radius:16px;padding:20px 17px;display:grid;gap:16px;min-width:0}
+.calc h2{font-size:18px;margin:0;color:var(--accent);font-weight:900}
+.calc .sub-note{color:var(--muted);font-size:12.5px;margin:-8px 0 0}
+.calc label{font-size:13px;font-weight:600;display:grid;gap:5px}
+.calc-out{display:grid;gap:10px;grid-template-columns:1fr 1fr}
+@media (max-width:420px){.calc-out{grid-template-columns:1fr}}
+.tile{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:13px 14px;display:grid;gap:4px;min-width:0}
+.tile .tlabel{font-size:12px;color:var(--muted);font-weight:700}
+.tile .tval{font-size:22px;color:var(--accent);font-weight:900;font-variant-numeric:tabular-nums;word-break:break-word}
+.tile .tsub{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.calc-rate{font-size:12px;color:var(--muted)}
+.calc-rate a{color:var(--accent);font-weight:700}
+.seg{display:flex;gap:4px;background:var(--surface-2);border-radius:999px;padding:4px}
+.seg input{position:absolute;opacity:0;pointer-events:none}
+.seg label{flex:1;min-width:0;text-align:center;padding:9px 4px;border-radius:999px;font-size:13px;font-weight:600;color:var(--muted);cursor:pointer;line-height:1.3}
+.seg input:checked+label{background:var(--accent);color:var(--accent-ink)}
+.seg input:focus-visible+label{outline:2px solid var(--brass);outline-offset:2px}
+.bin{display:grid;gap:6px;font-size:14px;font-weight:700}
+.unitwrap{display:flex;align-items:center;gap:8px}
+.unitwrap input{flex:1;min-width:0;font-size:18px;font-variant-numeric:tabular-nums}
+.unitwrap .unit{font-weight:600;color:var(--muted);font-size:14px}
+.split{display:flex;border-radius:10px;overflow:hidden;font-size:12.5px;font-weight:700;font-variant-numeric:tabular-nums;min-height:40px}
+.split>div{display:flex;align-items:center;justify-content:center;padding:6px 8px;text-align:center;line-height:1.3;min-width:0}
+.split .s-down{flex:2;background:var(--brass-soft);color:var(--ink);border:1px solid var(--brass);border-right:0;border-radius:10px 0 0 10px}
+.split .s-loan{flex:8;background:var(--accent);color:var(--accent-ink)}
+.flow{font-size:13.5px;color:var(--ink);font-weight:600;font-variant-numeric:tabular-nums}
+.calc-out.three{grid-template-columns:repeat(3,1fr)}
+.calc-out.three .tval{font-size:18px}
+@media (max-width:360px){.calc-out.three{grid-template-columns:1fr}}
+input[readonly]{background:var(--surface-2);color:var(--muted)}
+input:disabled{opacity:.5;cursor:not-allowed}
+.line-badge{display:inline-flex;vertical-align:-3px;margin-right:4px}
+.line-badge svg{display:block}
+.bar{position:fixed;left:0;right:0;bottom:0;background:var(--surface);border-top:1px solid var(--line);padding:12px 16px calc(12px + env(safe-area-inset-bottom,0px));z-index:20}
+.bar .in{max-width:560px;margin:0 auto;display:flex;gap:10px;align-items:center}
+.bar .prog{font-size:12.5px;color:var(--muted);flex:1;min-width:0}
+button{font:inherit;cursor:pointer;border-radius:999px;border:0;padding:12px 22px;font-weight:700}
+.primary{background:var(--brass);color:#fff}
+.ghost{background:var(--chip);color:var(--chip-ink)}
+button:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+#done{display:grid;gap:14px}
+.sumbox{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;white-space:pre-wrap;font-size:13.5px;line-height:1.75;max-height:52vh;overflow:auto;min-width:0}
+.actions{display:flex;flex-wrap:wrap;gap:10px}
+.actions a.lineBtn{display:inline-block;text-decoration:none;background:#06c755;color:#fff;border-radius:999px;padding:12px 22px;font-weight:700}
+.contactcard{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:13.5px;display:grid;gap:4px}
+.contactcard b{font-size:15px;color:var(--accent)}
+.ok{background:var(--accent-soft);border-radius:12px;padding:12px 14px;font-size:13.5px}
+.adv{border-style:dashed}
+.lead{color:var(--muted);font-size:13px;margin:-4px 0 10px;line-height:1.6}
+.must{display:inline-block;background:var(--accent-soft);color:var(--accent);font-weight:700;border-radius:6px;padding:0 6px;margin-right:2px}
+.more{justify-self:start;background:transparent;color:var(--accent);border:1px dashed var(--accent);padding:8px 16px;font-size:13px}
+.advToggle{width:100%;background:var(--accent-soft);color:var(--accent);padding:13px 16px;font-size:14px}
+.q.missing{background:var(--danger-soft);border-radius:12px;padding:10px;margin:-10px}
+.q.missing>.lbl,.q.missing>label{color:var(--danger)}
+section.missing{outline:2px solid var(--danger);outline-offset:2px}
+.prog.bad{color:var(--danger);font-weight:700}
+.prog.good{color:var(--accent);font-weight:700}
+.subrow{display:grid;gap:6px}
+section[data-step]:not([data-step="1"])>h2{display:none}
+.stepper{display:grid;gap:8px;padding-block:22px 14px}
+.steptop{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.steplbl{font-size:17px;font-weight:900;color:var(--accent)}
+.stepnum{font-size:12.5px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.stepbar{height:6px;border-radius:999px;background:var(--surface-2);overflow:hidden}
+.stepbar i{display:block;height:100%;width:0;background:var(--brass);border-radius:999px;transition:width .25s}
+.bar .in button.back{padding:12px 16px}
+.advnote{margin:-9px 0 0;font-size:12.5px;color:var(--muted)}
+.privacy{font-size:12px;color:var(--muted);text-align:center;margin-top:4px}
+.legal{font-size:11px;color:var(--muted);text-align:center;margin:14px 0 0;line-height:1.7}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><a href="./">‹ 回聖斌首頁</a><a href="mortgage.html">完整房貸試算 ›</a></div>
+  <header>
+    <div class="eyebrow">台中買屋・找房需求單</div>
+    <h1>花 3 分鐘，<br>幫您找到對的房子</h1>
+    <p class="lead">聖斌同時服務很多客戶，先把需求寫下來，之後聯絡就能直接談重點，不用重複問您同樣的問題。</p>
+    <p class="intro"><span class="must">只有 6 題必填</span>其他看心情，不確定的直接跳過。填完按「送出」，一鍵用 LINE 傳給聖斌。</p>
+    <div class="agent">
+      <div class="name">蘇聖斌</div>
+      <div class="role">專案經理・台灣房屋 松竹十一期特許加盟店</div>
+      <div class="row"><span class="line-badge" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.9 1.9 5.4 4.8 6.9-.2.8-.7 2.6-.8 3-.1.4.2.4.3.3.2-.1 2.6-1.7 3.6-2.4.7.1 1.4.2 2.1.2 5.5 0 10-3.6 10-8S17.5 3 12 3z" fill="#06c755"/></svg></span><b>LINE</b> 官方帳號 ／ 0958810178</div>
+      <div class="row"><b>電話</b> 0958-810-178</div>
+    </div>
+  </header>
+
+  <div class="stepper" id="stepper" hidden>
+    <div class="steptop"><div class="steplbl" id="stepLbl"></div><div class="stepnum" id="stepNum"></div></div>
+    <div class="stepbar"><i id="stepFill"></i></div>
+  </div>
+  <form id="f" novalidate>
+    <section class="grp">
+      <h2>關於您 <small>方便聖斌聯絡您</small></h2>
+      <div class="row2">
+        <div class="q"><label for="name">稱呼<span class="req">（必填）</span></label><input type="text" id="name" name="name" placeholder="例：陳先生" autocomplete="name"></div>
+        <div class="q"><label for="phone">手機<span class="req">（必填）</span></label><input type="tel" id="phone" name="phone" placeholder="09xx-xxx-xxx 或 +886 9xx-xxx-xxx" autocomplete="tel"></div>
+      </div>
+      <div class="q"><label for="living">目前住在哪裡？<span class="hint">縣市／區即可，外縣市也歡迎</span></label><input type="text" id="living" name="living" placeholder="例：台中市西區美滿街"></div>
+    </section>
+
+    <section class="grp">
+      <h2>買房目的與家人</h2>
+      <div class="q"><div class="lbl">這次買房主要是？<span class="req">（必填）</span></div><div class="chips" data-name="purpose" data-type="radio"></div></div>
+      <div class="q"><div class="lbl">預計什麼時候買？</div><div class="chips" data-name="timing" data-type="radio"></div></div>
+      <div class="q"><div class="lbl">住的人有哪些？<span class="hint">可複選</span></div><div class="chips" data-name="family" data-type="checkbox"></div></div>
+      <div class="q"><div class="lbl">名下目前有房子嗎？</div><div class="chips" data-name="owned" data-type="radio"></div></div>
+      <div class="q" id="oldWrap" hidden><div class="lbl">舊屋要不要一起委託聖斌賣？</div><div class="chips" data-name="sellOld" data-type="radio"></div>
+        <input type="text" id="oldHouse" name="oldHouse" placeholder="舊屋資料：地點、坪數、預估可賣多少、還剩多少房貸">
+      </div>
+    </section>
+
+    <section class="grp">
+      <h2>想要的房子</h2>
+      <div class="q"><div class="lbl">房屋類型<span class="hint">可複選</span><span class="req">（必填）</span></div><div class="chips" data-name="type" data-type="checkbox"></div></div>
+      <div class="q"><div class="lbl">房間數</div><div class="chips" data-name="rooms" data-type="radio"></div>
+        <input type="text" id="roomsOther" name="roomsOther" placeholder="直接填寫，例：要孝親房、要3改2房等特殊格局">
+      </div>
+      <div class="q"><label for="sizeUse">使用坪數<span class="hint">室內實際使用的大小</span></label><input type="text" id="sizeUse" name="sizeUse" placeholder="例：20坪"></div>
+      <div class="q"><div class="lbl">需要幾個車位？</div><div class="chips" data-name="parking" data-type="radio"></div>
+        <div class="q" id="parkTypeWrap" hidden><div class="lbl">車位類型<span class="hint">可複選</span></div><div class="chips" data-name="parkType" data-type="checkbox"></div></div>
+        <div class="q" id="parkLevelWrap" hidden><div class="lbl">機械車位要上層還是下層？</div><div class="chips" data-name="parkLevel" data-type="radio"></div></div>
+      </div>
+      <div class="q"><div class="lbl">屋齡類型<span class="hint">可複選</span></div><div class="chips" data-name="ageType" data-type="checkbox"></div>
+        <div class="row2" style="margin-top:2px">
+          <div class="q"><label for="ageMax">可接受最高屋齡<span class="hint">勾中古屋時填</span></label><input type="number" id="ageMax" name="ageMax" inputmode="numeric" min="0" placeholder="例：15"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="calc" id="budgetSec">
+      <h2>預算與房貸<span class="req">（必填）</span></h2>
+      <p class="sub-note">總價、自備款、每月房貸三者是連動的。選一個您最清楚的數字填入，另外兩個會自動算出來。</p>
+      <div class="seg" role="radiogroup" aria-label="試算方式">
+        <input type="radio" name="bmode" id="bm_price" value="price" checked><label for="bm_price">我知道總價</label>
+        <input type="radio" name="bmode" id="bm_month" value="month"><label for="bm_month">我知道月付</label>
+        <input type="radio" name="bmode" id="bm_down" value="down"><label for="bm_down">我知道自備款</label>
+      </div>
+      <label class="bin" for="budgetIn"><span id="budgetLbl">總價預算（含車位）</span>
+        <span class="unitwrap"><input type="number" id="budgetIn" inputmode="decimal" min="0" placeholder="例：1500"><span class="unit" id="budgetUnit">萬</span></span>
+      </label>
+      <div class="err" id="budgetWarn" hidden></div>
+      <div class="split" aria-hidden="true">
+        <div class="s-down" id="splitDown">自備款 2成</div>
+        <div class="s-loan" id="splitLoan">銀行貸款 8成</div>
+      </div>
+      <div class="calc-out three">
+        <div class="tile"><div class="tlabel">總價</div><div class="tval" id="outPrice">—</div></div>
+        <div class="tile"><div class="tlabel">自備款</div><div class="tval" id="outDown">—</div></div>
+        <div class="tile"><div class="tlabel">貸款</div><div class="tval" id="outLoan">—</div></div>
+      </div>
+      <div class="flow" id="flowLine">填入數字後，這裡會顯示貸款每月要繳多少。</div>
+      <div class="calc-out">
+        <div class="tile">
+          <div class="tlabel">本利均攤・每月固定</div>
+          <div class="tval" id="outLevel">—</div>
+          <div class="tsub" id="outLevelTotal"></div>
+        </div>
+        <div class="tile">
+          <div class="tlabel">本金均攤・第1期 → 最後1期</div>
+          <div class="tval" id="outEqual">—</div>
+          <div class="tsub" id="outEqualTotal"></div>
+        </div>
+      </div>
+      <div class="q"><div class="lbl">是否問過貸款初審？</div><div class="chips" data-name="preApproval" data-type="radio"></div></div>
+      <div class="calc-rate">試算條件：貸款 8 成、30 年、年利率 2.185%（參考值）。僅供參考，實際成數與利率依銀行及個人條件為準；名下已有房貸者，成數另計。想改成數、年限、寬限期，用 <a href="mortgage.html">完整房貸試算</a>。買房另需預留稅費、仲介費、代書費與裝潢費用。</div>
+    </section>
+
+    <section class="grp">
+      <h2>地點與生活</h2>
+      <div class="q"><div class="lbl">想住哪一區？<span class="hint">可複選；不確定就選「不知道」</span><span class="req">（必填）</span></div>
+        <div class="chips" data-name="areaHelp" data-type="checkbox"></div>
+        <div class="areagrp"><div class="sub">熱門核心地段</div><div class="chips" data-name="areaCore" data-type="checkbox"></div></div>
+        <div class="areagrp"><div class="sub">熱門重劃區</div><div class="chips" data-name="areaHot" data-type="checkbox"></div></div>
+        <button type="button" class="more" id="moreAreaBtn" aria-expanded="false" aria-controls="moreAreas">＋ 更多區域（山線、海線）</button>
+        <div id="moreAreas" class="q" hidden>
+          <div class="areagrp"><div class="sub">山線</div><div class="chips" data-name="areaMtn" data-type="checkbox"></div></div>
+          <div class="areagrp"><div class="sub">海線</div><div class="chips" data-name="areaSea" data-type="checkbox"></div></div>
+        </div>
+        <input type="text" id="areaOther" name="areaOther" placeholder="指定社區、路段或其他想法">
+      </div>
+      <div class="q"><label for="commute">上班地點、孩子學校或常去的地方<span class="hint">幫聖斌判斷要找哪一區</span></label><input type="text" id="commute" name="commute" placeholder="例：七期台灣大道上班、大甲通勤"></div>
+      <div class="q"><div class="lbl">通勤方式與時間</div>
+        <div class="subrow"><div class="sub">怎麼通勤</div><div class="chips" data-name="transport" data-type="checkbox"></div></div>
+        <div class="subrow"><div class="sub">單程最多能接受</div><div class="chips" data-name="commuteMax" data-type="radio"></div></div>
+      </div>
+      <div class="q"><div class="lbl">最在意的 3 件事<span class="hint">最多選 3 個</span></div><div class="chips" data-name="priority" data-type="checkbox" data-max="3"></div><div class="err" id="prio-err" hidden>最多選 3 個，請先取消一個再選。</div></div>
+      <div class="q" id="schoolWrap" hidden><label for="school">指定的學校或學區</label><input type="text" id="school" name="school" placeholder="例：仁美國小、四張犁國中"></div>
+      <div class="q"><div class="lbl">抗性偏好<span class="hint">風水、環境、設施的在意程度</span></div><div class="chips" data-name="fengshuiLevel" data-type="radio"></div></div>
+      <div class="q" id="fsWrap" style="gap:19px" hidden>
+        <div class="q"><div class="lbl">風水上在意的<span class="hint">可複選</span></div><div class="chips" data-name="fengshui" data-type="checkbox"></div>
+          <input type="text" id="fengshuiText" name="fengshuiText" placeholder="例：怕惡鄰居、格局不正，或是需要我注意的">
+        </div>
+        <div class="q"><div class="lbl">不能接受的環境、設施<span class="hint">可複選</span></div><div class="chips" data-name="avoid" data-type="checkbox"></div></div>
+      </div>
+    </section>
+
+    <section class="grp">
+      <h2>看房經驗與其他</h2>
+      <div class="q"><div class="lbl">已經看過幾間？</div><div class="chips" data-name="seen" data-type="radio"></div></div>
+      <div class="q" id="expWrap" style="gap:19px">
+        <div class="q"><div class="lbl">有出價或斡旋過物件嗎？</div><div class="chips" data-name="offered" data-type="radio"></div>
+          <input type="text" id="offer" name="offer" placeholder="物件、出價金額、結果"></div>
+        <div class="q"><label for="liked">有看過或喜歡的社區嗎？</label><input type="text" id="liked" name="liked" placeholder="例：惠宇碧柳、華太怡居"></div>
+        <div class="q"><div class="lbl">之前看的房子，為什麼沒買？<span class="hint">可複選</span></div><div class="chips" data-name="whyNot" data-type="checkbox"></div>
+          <input type="text" id="whyNotText" name="whyNotText" placeholder="可以寫具體的社區和原因"></div>
+      </div>
+      <div class="q"><label for="memo">其他想讓聖斌知道的</label><textarea id="memo" name="memo" placeholder="例：需要營登、特殊行業、一定要有視野"></textarea></div>
+    </section>
+
+    <section class="grp adv">
+      <button type="button" class="advToggle" id="advToggle" aria-expanded="false" aria-controls="advBody">想讓推薦更準？再回答 9 題（選填）＋</button>
+      <div id="advBody" class="q" style="gap:19px" hidden>
+      <p class="advnote" style="margin:0">幫聖斌判斷哪一間適合您。不想答的直接跳過。</p>
+      <div class="q"><div class="lbl">您的年齡層</div><div class="chips" data-name="ageGroup" data-type="radio"></div></div>
+      <div class="q"><div class="lbl">誰會一起決定？</div><div class="chips" data-name="decider" data-type="checkbox"></div></div>
+      <div class="q"><div class="lbl">打算住或持有多久？</div><div class="chips" data-name="hold" data-type="radio"></div></div>
+      <div class="q"><div class="lbl">樓層偏好</div><div class="chips" data-name="floor" data-type="radio"></div></div>
+      <div class="q"><div class="lbl">邊間偏好</div><div class="chips" data-name="corner" data-type="radio"></div></div>
+      <div class="q"><div class="lbl">座向偏好</div><div class="chips" data-name="facing" data-type="radio"></div>
+        <input type="text" id="facingOther" name="facingOther" placeholder="其他座向說明">
+        <div id="westWrap" hidden><div class="chips" data-name="facingWest" data-type="checkbox"></div></div>
+      </div>
+      <div class="q"><div class="lbl">裝潢</div><div class="chips" data-name="reno" data-type="radio"></div></div>
+      <div class="q"><div class="lbl">管理費每月上限</div><div class="chips" data-name="mgmt" data-type="radio"></div></div>
+      <div class="q"><label for="dream">描述一下理想的生活</label><textarea id="dream" name="dream" placeholder="例：早上走路送小孩上學，下班 15 分鐘到家，週末在社區中庭陪孩子玩"></textarea></div>
+      </div>
+    </section>
+    <section class="grp">
+      <h2>最後一步 <small>約個時間看房</small></h2>
+      <div class="q"><div class="lbl">比較有空看房的時間？</div><div class="chips" data-name="viewTime" data-type="radio"></div>
+        <input type="text" id="viewTimeText" name="viewTimeText" placeholder="或直接填方便的日期時段"></div>
+    </section>
+    <div class="err" id="formErr" role="alert" hidden></div>
+    <div id="lastNotes" hidden>
+    <p class="privacy" style="color:var(--ink);font-size:13px">按「送出」後會開啟聖斌的 LINE 官方帳號，內容已幫您填好，按傳送即可。</p>
+    <p class="privacy">您的資料只用於幫您找房，不會提供給第三方。</p>
+    </div>
+  </form>
+
+  <div id="done" hidden>
+    <header style="padding-bottom:0">
+      <div class="eyebrow">最後一步</div>
+      <h1>按下綠色按鈕，傳給聖斌</h1>
+      <p class="intro">會打開聖斌的 LINE，內容已經幫您填好，按「傳送」就完成。</p>
+    </header>
+    <div class="contactcard"><b>蘇聖斌</b>台灣房屋 松竹十一期特許加盟店<br>LINE 官方帳號 ／ 電話：0958-810-178</div>
+    <div class="actions">
+      <a class="lineBtn" id="lineBtn" href="#" target="_blank" rel="noopener">用 LINE 傳給聖斌</a>
+      <button type="button" class="ghost" id="copyBtn">複製內容</button>
+      <button type="button" class="ghost" id="editBtn">回去修改</button>
+    </div>
+    <div class="ok" id="copyMsg" hidden>已複製。打開 LINE 加入聖斌官方帳號（lin.ee/tcIH5J0），貼上後傳送即可。</div>
+    <p class="note" style="margin:0">如果按鈕沒反應：先按「複製內容」，再到 LINE 加入 <a href="https://lin.ee/tcIH5J0">聖斌官方帳號</a> 貼上傳送；或直接來電 0958-810-178。</p>
+    <div class="sumbox" id="sum" tabindex="0"></div>
+  </div>
+  <p class="legal">尚峰不動產有限公司｜經紀人：林建宏 (103)00667｜營業員：蘇聖斌 (111)416424</p>
+</div>
+
+<div class="bar" id="bar">
+  <div class="in">
+    <button type="button" class="ghost back" id="backBtn" hidden>上一步</button>
+    <div class="prog" id="prog"></div>
+    <button type="button" class="primary" id="nextBtn">下一步</button>
+  </div>
+</div>
+
+<script>
+const LINE_ID="@a0888";
+const OPTS={
+  purpose:["首購自住","換屋自住","投資置產","收租置產","買給家人／孝親","自用店面"],
+  family:["單身","夫妻","有小孩（學齡前）","有小孩（國小）","有小孩（國中以上）","長輩同住","有寵物"],
+  owned:["沒有，第一次買","有，要先賣舊屋","有，舊的不賣"],
+  sellOld:["委託聖斌一起賣","自己處理就好","還在考慮"],
+  type:["電梯大樓","公寓","華廈","透天","電梯別墅","店面","土地","套房","透套","都可以"],
+  rooms:["1 房","2 房","3 房","4 房","5 房以上"],
+  parking:["不需要","1 個","2 個","3 個","4 個","5 個"],
+  parkType:["平面","機械式"],
+  parkLevel:["上層","下層","都可以"],
+  ageType:["預售屋","新成屋","中古屋","不拘"],
+  areaHelp:["不知道，請聖斌建議"],
+  areaCore:["中區","北區","東區","西區","南區","北屯區","西屯區","南屯區"],
+  areaHot:["七期","水湳經貿園區","十二期","單元二（南屯）","北屯機捷特區","北屯十四期（洲際）","捷運綠線沿線","高鐵特區（烏日）"],
+  areaMtn:["豐原區","潭子區","大雅區","神岡區","后里區","石岡區","東勢區","新社區","和平區","太平區","大里區","霧峰區","烏日區"],
+  areaSea:["沙鹿區","龍井區","梧棲區","清水區","大肚區","大甲區","外埔區","大安區"],
+  priority:["近捷運","明星學區","公園綠地","生活機能","總價低","增值保值","景觀採光","低公設比","安靜","建商品牌","車位好停"],
+  avoid:["鐵路／高架","大馬路車流","高壓電塔／基地台","加油站","殯葬設施","夜市","頂樓加蓋","高公設比"],
+  fengshuiLevel:["完全不在意","有點在意","非常在意"],
+  timing:["越快越好","3 個月內","半年內","1 年內","有喜歡就買"],
+  viewTime:["平日白天","平日晚上","週末"],
+  preApproval:["還沒問過","問過，額度足夠","問過，額度不夠","需要聖斌協助"],
+  offered:["沒有","有出價／斡旋過","正在斡旋中"],
+  ageGroup:["30 歲以下","30–39 歲","40–49 歲","50–59 歲","60 歲以上"],
+  decider:["自己決定","夫妻一起","要問父母","要給家人看過"],
+  hold:["2 年內","2–5 年","5–10 年","10 年以上","一直住"],
+  transport:["開車","機車","捷運","公車","走路／腳踏車"],
+  commuteMax:["15 分鐘","30 分鐘","45 分鐘","1 小時","不在意"],
+  corner:["要邊間","不要邊間","不拘"],
+  floor:["低樓層","中樓層","高樓層","不拘"],
+  facing:["朝南","朝東","朝北","朝西","不拘"],
+  facingWest:["介意嚴重西曬"],
+  fengshui:["路沖","壁刀","反弓路","無尾巷","對到宮廟","樑壓床","大門對大門","不要4"],
+  reno:["無裝潢","精裝戶","願意小整修","願意大整修","不拘"],
+  mgmt:["2,000 以下","2,000–4,000","4,000–6,000","6,000 以上","不在意"],
+  seen:["還沒看","1–5 間","6–15 間","15 間以上"],
+  whyNot:["價格太高","格局不好","採光不好","屋況差","有嫌惡設施","地點不對","家人不同意","貸款不夠","還在比較"]
+};
+const LABELS={
+  purpose:"買房主要目的", family:"住的人有哪些", owned:"名下目前有房子嗎", sellOld:"舊屋是否委託聖斌賣",
+  type:"房屋類型", rooms:"房間數", parking:"車位需求", ageType:"屋齡類型",
+  areaHelp:"地點", areaCore:"熱門核心地段", areaMtn:"山線", areaSea:"海線",
+  priority:"最在意的 3 件事", avoid:"不能接受的環境、設施", fengshuiLevel:"抗性偏好",
+  timing:"預計購屋時間", viewTime:"方便看房時間", preApproval:"是否問過貸款初審", offered:"是否出價斡旋過",
+  ageGroup:"年齡層", decider:"決策者", hold:"持有時間", transport:"通勤方式", commuteMax:"通勤可接受時間",
+  floor:"樓層偏好", corner:"邊間偏好", facing:"座向偏好", facingWest:"西曬", fengshui:"風水在意項目", reno:"裝潢需求", mgmt:"管理費上限", seen:"已看過幾間", whyNot:"之前沒買的原因"
+};
+
+const form=document.getElementById("f");
+document.querySelectorAll(".chips").forEach(box=>{
+  const n=box.dataset.name, t=box.dataset.type, max=box.dataset.max?parseInt(box.dataset.max,10):0;
+  OPTS[n].forEach((o,i)=>{
+    const id=n+"_"+i;
+    const inp=document.createElement("input"); inp.type=t; inp.name=n; inp.value=o; inp.id=id;
+    const lb=document.createElement("label"); lb.htmlFor=id; lb.textContent=o;
+    if(t==="checkbox" && max){
+      inp.addEventListener("change",()=>{
+        const checked=form.querySelectorAll('input[name="'+n+'"]:checked');
+        const err=document.getElementById("prio-err");
+        if(checked.length>max){ inp.checked=false; if(err) err.hidden=false; }
+        else if(err){ err.hidden=true; }
+        updateProgress();
+      });
+    } else {
+      inp.addEventListener("change",updateProgress);
+    }
+    box.appendChild(inp); box.appendChild(lb);
+  });
+});
+form.querySelectorAll('input[type=text],input[type=tel],input[type=number],textarea').forEach(el=>{
+  el.addEventListener("input",updateProgress);
+});
+
+function uncheck(name,except){
+  form.querySelectorAll('input[name="'+name+'"]').forEach(i=>{ if(i.value!==except) i.checked=false; });
+}
+function syncConditional(){
+  const pk=chosen("parking");
+  const needPark=pk.length && pk[0]!=="不需要";
+  const pw=document.getElementById("parkTypeWrap"), lw=document.getElementById("parkLevelWrap");
+  pw.hidden=!needPark;
+  if(!needPark) uncheck("parkType","__none__");
+  const mech=needPark && chosen("parkType").indexOf("機械式")>=0;
+  lw.hidden=!mech;
+  if(!mech) uncheck("parkLevel","__none__");
+  const fl=chosen("fengshuiLevel");
+  const caresFs=fl.length && fl[0]!=="完全不在意";
+  document.getElementById("fsWrap").hidden=!caresFs;
+  if(!caresFs){ uncheck("fengshui","__none__"); uncheck("avoid","__none__"); document.getElementById("fengshuiText").value=""; }
+  const sellingOld=chosen("owned").indexOf("有，要先賣舊屋")>=0;
+  document.getElementById("oldWrap").hidden=!sellingOld;
+  if(!sellingOld){ uncheck("sellOld","__none__"); document.getElementById("oldHouse").value=""; }
+  const kids=chosen("family").some(v=>v.indexOf("有小孩")===0) || chosen("priority").indexOf("明星學區")>=0;
+  document.getElementById("schoolWrap").hidden=!kids;
+  if(!kids) document.getElementById("school").value="";
+  const noneSeen=chosen("seen").indexOf("還沒看")>=0;
+  document.getElementById("expWrap").hidden=noneSeen;
+  if(noneSeen){ ["offered","whyNot"].forEach(n=>uncheck(n,"__none__")); ["offer","liked","whyNotText"].forEach(id=>{ document.getElementById(id).value=""; }); }
+  const anyFacing=chosen("facing").indexOf("不拘")>=0;
+  document.getElementById("westWrap").hidden=!anyFacing;
+  if(!anyFacing) uncheck("facingWest","__none__");
+}
+function syncAge(){
+  const ageMax=document.getElementById("ageMax");
+  const mid=Array.from(form.querySelectorAll('input[name="ageType"]:checked')).some(i=>i.value==="中古屋");
+  ageMax.disabled=!mid;
+  if(!mid) ageMax.value="";
+}
+form.addEventListener("change",e=>{
+  const t=e.target;
+  if(!t.name||!t.checked) { syncAge(); syncConditional(); updateProgress(); return; }
+  const areaNames=["areaCore","areaHot","areaMtn","areaSea"];
+  if(t.name==="areaHelp"){ areaNames.forEach(n=>uncheck(n)); }
+  else if(areaNames.indexOf(t.name)>=0){ uncheck("areaHelp"); }
+  if(t.name==="ageType"){
+    if(t.value==="不拘"){ uncheck("ageType","不拘"); }
+    else { form.querySelectorAll('input[name="ageType"]').forEach(i=>{ if(i.value==="不拘") i.checked=false; }); }
+  }
+  syncAge(); syncConditional(); updateProgress();
+});
+syncAge(); syncConditional();
+
+function setupToggles(){
+  const t=document.getElementById("advToggle"), b=document.getElementById("advBody");
+  t.addEventListener("click",()=>{ const open=b.hidden; b.hidden=!open; t.setAttribute("aria-expanded",String(open)); t.textContent=open?"收起進階題 －":"想讓推薦更準？再回答 9 題（選填）＋"; });
+  const m=document.getElementById("moreAreaBtn"), a=document.getElementById("moreAreas");
+  m.addEventListener("click",()=>{ const open=a.hidden; a.hidden=!open; m.setAttribute("aria-expanded",String(open)); m.textContent=open?"－ 收起山線、海線":"＋ 更多區域（山線、海線）"; });
+}
+setupToggles();
+
+/* 分頁流程 */
+const SECTIONS=[...form.querySelectorAll(":scope > section")];
+const STEP_OF_SECTION=[1,2,3,4,5,6,6,7];
+const STEP_TITLES={1:"關於您",2:"買房目的與家人",3:"想要的房子",4:"預算與房貸",5:"地點與生活",6:"看房經驗與其他",7:"最後一步：約個時間看房"};
+const TOTAL=7;
+SECTIONS.forEach((sec,i)=>{ sec.dataset.step=STEP_OF_SECTION[i]||TOTAL; });
+let cur=1;
+const tried={};
+function stepOf(el){ const sec=el && el.closest("section[data-step]"); return sec? +sec.dataset.step : 1; }
+function goStep(n){
+  cur=Math.max(1,Math.min(TOTAL,n));
+  SECTIONS.forEach(sec=>{ sec.hidden = +sec.dataset.step!==cur; });
+  document.querySelector(".wrap > header").hidden = cur!==1;
+  document.getElementById("stepper").hidden = cur===1;
+  document.getElementById("stepLbl").textContent=STEP_TITLES[cur];
+  document.getElementById("stepNum").textContent="第 "+cur+"／"+TOTAL+" 頁";
+  document.getElementById("stepFill").style.width=(cur/TOTAL*100)+"%";
+  document.getElementById("backBtn").hidden = cur===1;
+  document.getElementById("nextBtn").textContent = cur===TOTAL? "送出" : "下一步";
+  document.getElementById("lastNotes").hidden = cur!==TOTAL;
+  document.getElementById("formErr").hidden = true;
+  updateProgress();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function markMissing(list){
+  form.querySelectorAll(".missing").forEach(q=>q.classList.remove("missing"));
+  list.forEach(m=>{ const q=m[1] && m[1].closest(".q, section"); if(q) q.classList.add("missing"); });
+}
+function updateProgress(){
+  const prog=document.getElementById("prog");
+  let miss;
+  try{ miss=validate(); }catch(e){ return; }
+  const here=miss.filter(m=>stepOf(m[1])===cur);
+  prog.classList.remove("bad","good");
+  if(tried[cur] && here.length){
+    prog.textContent="這頁還差："+here.map(m=>m[0].replace(/（.*）/,"")).join("、");
+    prog.classList.add("bad");
+  } else if(here.length){
+    prog.textContent="這頁有 "+here.length+" 題必填";
+  } else if(cur===TOTAL && !miss.length){
+    prog.textContent="都完成了，按送出";
+    prog.classList.add("good");
+  } else {
+    prog.textContent="第 "+cur+"／"+TOTAL+" 頁";
+  }
+  markMissing(tried[cur]? here : []);
+}
+document.getElementById("nextBtn").addEventListener("click",()=>{
+  if(cur===TOTAL){
+    if(form.requestSubmit) form.requestSubmit(); else form.dispatchEvent(new Event("submit",{cancelable:true}));
+    return;
+  }
+  const here=validate().filter(m=>stepOf(m[1])===cur);
+  if(here.length){
+    tried[cur]=true; updateProgress();
+    here[0][1].scrollIntoView({behavior:"smooth",block:"center"});
+    if(here[0][1].focus) here[0][1].focus();
+    return;
+  }
+  goStep(cur+1);
+});
+document.getElementById("backBtn").addEventListener("click",()=>goStep(cur-1));
+updateProgress();
+
+/* 預算：總價 ⇄ 自備款 ⇄ 月付 */
+const RATE=2.185, YEARS=30, N=YEARS*12, MR=RATE/100/12, CALC_MAX=3999, LTV=0.8;
+function fmtWan(v){ return isFinite(v)? Math.round(v).toLocaleString("zh-TW") : "—"; }
+const AF=(Math.pow(1+MR,N)-1)/(MR*Math.pow(1+MR,N));
+const MODES={
+  price:{lbl:"總價預算（含車位）",unit:"萬",ph:"例：1500"},
+  month:{lbl:"每月可負擔的房貸",unit:"元",ph:"例：35000"},
+  down:{lbl:"可準備的自備款",unit:"萬",ph:"例：300"}
+};
+const budgetIn=document.getElementById("budgetIn");
+function bmode(){ const r=form.querySelector('input[name="bmode"]:checked'); return r? r.value : "price"; }
+function budget(){
+  const v=parseFloat(budgetIn.value);
+  if(!(v>0)) return null;
+  const m=bmode();
+  let price;
+  if(m==="price") price=v;
+  else if(m==="down") price=v/(1-LTV);
+  else price=v*AF/LTV/10000;
+  const loan=price*LTV, down=price-loan;
+  const level=loan*10000/AF;
+  return {mode:m,input:v,price,down,loan,level,over:price>CALC_MAX};
+}
+function renderBudget(){
+  const b=budget();
+  const w=document.getElementById("budgetWarn");
+  const ids=["outPrice","outDown","outLoan","outLevel","outLevelTotal","outEqual","outEqualTotal"];
+  const set=(id,t)=>{ document.getElementById(id).textContent=t; };
+  w.hidden=true;
+  document.getElementById("splitDown").textContent="自備款 2成";
+  document.getElementById("splitLoan").textContent="銀行貸款 8成";
+  if(!b){ ids.forEach(i=>set(i,i.endsWith("Total")?"":"—")); set("flowLine","填入數字後，這裡會顯示貸款每月要繳多少。"); return null; }
+  set("outPrice",fmtWan(b.price)+" 萬");
+  if(b.over){
+    w.textContent="總價 4,000 萬以上屬豪宅，貸款成數有限制，自備款與月付需個別評估，請洽聖斌。";
+    w.hidden=false;
+    ["outDown","outLoan","outLevel","outEqual"].forEach(i=>set(i,"—"));
+    ["outLevelTotal","outEqualTotal"].forEach(i=>set(i,""));
+    set("flowLine","豪宅貸款條件因人而異，聖斌會依您的狀況幫您試算。");
+    return b;
+  }
+  set("outDown",fmtWan(b.down)+" 萬");
+  set("outLoan",fmtWan(b.loan)+" 萬");
+  document.getElementById("splitDown").textContent="自備 "+fmtWan(b.down)+" 萬";
+  document.getElementById("splitLoan").textContent="貸款 "+fmtWan(b.loan)+" 萬";
+  const P=b.loan*10000;
+  const firstEqual=P/N+P*MR, lastEqual=P/N+(P/N)*MR;
+  const equalInt=P*MR*(N+1)/2;
+  set("flowLine","貸款 "+fmtWan(b.loan)+" 萬，分 30 年還 → 每月約 NT$ "+fmtWan(b.level));
+  set("outLevel","NT$ "+fmtWan(b.level)+" /月");
+  set("outLevelTotal","30年總利息約 "+fmtWan(b.level*N-P)+" 元");
+  set("outEqual","NT$ "+fmtWan(firstEqual)+" → "+fmtWan(lastEqual));
+  set("outEqualTotal","30年總利息約 "+fmtWan(equalInt)+" 元");
+  return b;
+}
+function applyMode(prev){
+  const m=bmode(), cfg=MODES[m];
+  document.getElementById("budgetLbl").textContent=cfg.lbl;
+  document.getElementById("budgetUnit").textContent=cfg.unit;
+  budgetIn.placeholder=cfg.ph;
+  if(prev && !prev.over){
+    budgetIn.value = m==="price"? Math.round(prev.price) : m==="down"? Math.round(prev.down) : Math.round(prev.level/100)*100;
+  } else if(prev && prev.over){ budgetIn.value = m==="price"? Math.round(prev.price) : ""; }
+  renderBudget();
+}
+let lastBudget=null;
+form.querySelectorAll('input[name="bmode"]').forEach(r=>r.addEventListener("change",()=>{ applyMode(lastBudget); updateProgress(); }));
+budgetIn.addEventListener("input",()=>{ lastBudget=renderBudget(); });
+
+function chosen(name){
+  return Array.from(form.querySelectorAll('input[name="'+name+'"]:checked')).map(i=>i.value);
+}
+function textVal(id){
+  const el=document.getElementById(id);
+  return el && el.value.trim() ? el.value.trim() : "";
+}
+
+function buildSummary(){
+  const lines=[];
+  lines.push("【找房需求單】");
+  const name=textVal("name"), phone=textVal("phone");
+  if(name) lines.push("稱呼：" + name);
+  if(phone) lines.push("手機：" + phone);
+  const living=textVal("living"); if(living) lines.push("目前住：" + living);
+  const purpose=chosen("purpose"); if(purpose.length) lines.push(LABELS.purpose+"："+purpose.join("、"));
+  const family=chosen("family"); if(family.length) lines.push(LABELS.family+"："+family.join("、"));
+  const owned=chosen("owned"); if(owned.length) lines.push(LABELS.owned+"："+owned.join("、"));
+  const sellOld=chosen("sellOld"); if(sellOld.length) lines.push(LABELS.sellOld+"："+sellOld.join("、"));
+  const oldHouse=textVal("oldHouse"); if(oldHouse) lines.push("舊屋資料："+oldHouse);
+
+  const type=chosen("type"); if(type.length) lines.push(LABELS.type+"："+type.join("、"));
+  const rooms=chosen("rooms"); if(rooms.length) lines.push(LABELS.rooms+"："+rooms.join("、"));
+  const sizeUse=textVal("sizeUse"); if(sizeUse) lines.push("使用坪數："+sizeUse);
+  const pk=chosen("parking");
+  if(pk.length){
+    let s=pk.join("、");
+    const pt=chosen("parkType"); if(pt.length) s+="，"+pt.join("、");
+    const pl=chosen("parkLevel"); if(pl.length) s+="（機械：要"+pl.join("、")+"）";
+    lines.push(LABELS.parking+"："+s);
+  }
+  const roomsOther=textVal("roomsOther"); if(roomsOther) lines.push("房間數補充："+roomsOther);
+  const ageType=chosen("ageType"); const ageMax=textVal("ageMax");
+  if(ageType.length || ageMax) lines.push("屋齡："+[ageType.join("、"), ageMax?("可接受最高"+ageMax+"年"):""].filter(Boolean).join("，"));
+
+  const b=budget();
+  if(b){
+    const via = b.mode==="month"? "（依每月可付 NT$"+fmtWan(b.input)+" 反推）" : b.mode==="down"? "（依自備款 "+fmtWan(b.input)+" 萬反推）" : "";
+    lines.push("總價預算：約 "+fmtWan(b.price)+" 萬"+via);
+    if(b.over) lines.push("房貸試算：總價 4,000 萬以上，屬豪宅限貸，需個別評估");
+    else lines.push("房貸試算（貸8成、30年"+RATE+"%）：自備約 "+fmtWan(b.down)+" 萬、貸款約 "+fmtWan(b.loan)+" 萬、本利均攤每月約 NT$"+fmtWan(b.level));
+  }
+
+  const areas=[...chosen("areaHelp"),...chosen("areaCore"),...chosen("areaHot"),...chosen("areaMtn"),...chosen("areaSea")];
+  const areaOther=textVal("areaOther");
+  if(areas.length||areaOther) lines.push("想住的區域："+[...areas, areaOther].filter(Boolean).join("、"));
+  const commute=textVal("commute"); if(commute) lines.push("常去地方／通勤："+commute);
+  ["transport","commuteMax","priority"].forEach(k=>{ const v=chosen(k); if(v.length) lines.push(LABELS[k]+"："+v.join("、")); });
+  const school=textVal("school"); if(school) lines.push("指定學區："+school);
+  const fsLevel=chosen("fengshuiLevel"); if(fsLevel.length) lines.push(LABELS.fengshuiLevel+"："+fsLevel.join("、"));
+  const fs=chosen("fengshui"); const fsText=textVal("fengshuiText");
+  if(fs.length||fsText) lines.push(LABELS.fengshui+"："+[fs.join("、"), fsText].filter(Boolean).join("，"));
+  const avoid=chosen("avoid"); if(avoid.length) lines.push(LABELS.avoid+"："+avoid.join("、"));
+
+  const timing=chosen("timing"); if(timing.length) lines.push(LABELS.timing+"："+timing.join("、"));
+  const viewTime=chosen("viewTime"); const viewTimeText=textVal("viewTimeText");
+  if(viewTime.length||viewTimeText) lines.push("方便看房時間："+[viewTime.join("、"), viewTimeText].filter(Boolean).join("，"));
+  const preApproval=chosen("preApproval"); if(preApproval.length) lines.push(LABELS.preApproval+"："+preApproval.join("、"));
+  const offered=chosen("offered"); const offer=textVal("offer");
+  if(offered.length||offer) lines.push("出價斡旋紀錄："+[offered.join("、"), offer].filter(Boolean).join("，"));
+  const liked=textVal("liked"); if(liked) lines.push("喜歡的社區："+liked);
+  const seen=chosen("seen"); if(seen.length) lines.push(LABELS.seen+"："+seen.join("、"));
+  const whyNot=chosen("whyNot"); const whyNotText=textVal("whyNotText");
+  if(whyNot.length||whyNotText) lines.push(LABELS.whyNot+"："+[whyNot.join("、"), whyNotText].filter(Boolean).join("，"));
+  const memo=textVal("memo"); if(memo) lines.push("其他備註："+memo);
+
+  const advKeys=["ageGroup","decider","hold","floor","corner","facing","facingWest","reno","mgmt"];
+  const advLines=[];
+  advKeys.forEach(k=>{ const v=chosen(k); if(v.length) advLines.push(LABELS[k]+"："+v.join("、")); });
+  const facingOther=textVal("facingOther"); if(facingOther) advLines.push("座向補充："+facingOther);
+  const dream=textVal("dream"); if(dream) advLines.push("理想生活："+dream);
+  if(advLines.length){ lines.push("—— 進階資訊 ——"); lines.push(...advLines); }
+
+  return lines.join("\n");
+}
+
+function validate(){
+  const miss=[];
+  if(!textVal("name")) miss.push(["稱呼",document.getElementById("name")]);
+  const ph=textVal("phone").replace(/[\s\-()]/g,"");
+  if(!/^(?:\+?8860?|0)9\d{8}$/.test(ph)) miss.push(["手機（09 開頭，或 +886 9 開頭）",document.getElementById("phone")]);
+  [["purpose","買房目的"],["type","房屋類型"]].forEach(([k,l])=>{
+    if(!chosen(k).length) miss.push([l,form.querySelector('.chips[data-name="'+k+'"]')]);
+  });
+  if(!budget()) miss.push(["預算（總價、月付、自備款擇一填寫）",document.getElementById("budgetIn")]);
+  const hasArea=[...chosen("areaHelp"),...chosen("areaCore"),...chosen("areaHot"),...chosen("areaMtn"),...chosen("areaSea")].length || textVal("areaOther");
+  if(!hasArea) miss.push(["想住的區域",form.querySelector('.chips[data-name="areaHelp"]')]);
+  return miss;
+}
+form.addEventListener("submit",e=>{
+  e.preventDefault();
+  if(cur!==TOTAL){ document.getElementById("nextBtn").click(); return; }
+  const miss=validate(), errBox=document.getElementById("formErr");
+  if(miss.length){
+    const first=stepOf(miss[0][1]);
+    tried[first]=true;
+    if(first!==cur) goStep(first); else updateProgress();
+    errBox.textContent="還有 "+miss.length+" 題必填沒填："+miss.map(m=>m[0]).join("、")+"。已用紅色標出，填好再按一次送出。";
+    errBox.hidden=false;
+    setTimeout(()=>{ miss[0][1].scrollIntoView({behavior:"smooth",block:"center"}); if(miss[0][1].focus) miss[0][1].focus(); },80);
+    return;
+  }
+  errBox.hidden=true;
+  form.querySelectorAll(".missing").forEach(q=>q.classList.remove("missing"));
+  const text=buildSummary();
+  document.getElementById("sum").textContent=text;
+  const lineUrl="https://line.me/R/oaMessage/"+LINE_ID+"/"+encodeURIComponent(text);
+  document.getElementById("lineBtn").href=lineUrl;
+  form.hidden=true;
+  document.getElementById("bar").hidden=true;
+  document.getElementById("stepper").hidden=true;
+  document.querySelector(".wrap > header").hidden=false;
+  document.getElementById("done").hidden=false;
+  window.scrollTo({top:0,behavior:"smooth"});
+});
+
+document.getElementById("copyBtn").addEventListener("click",async()=>{
+  const text=document.getElementById("sum").textContent;
+  const msg=document.getElementById("copyMsg");
+  try{
+    await navigator.clipboard.writeText(text);
+    msg.hidden=false;
+  }catch(err){
+    const range=document.createRange();
+    range.selectNodeContents(document.getElementById("sum"));
+    const sel=window.getSelection();
+    sel.removeAllRanges(); sel.addRange(range);
+    msg.hidden=false;
+  }
+});
+document.getElementById("editBtn").addEventListener("click",()=>{
+  document.getElementById("done").hidden=true;
+  form.hidden=false;
+  document.getElementById("bar").hidden=false;
+  goStep(1);
+  window.scrollTo({top:0,behavior:"smooth"});
+});
+goStep(1);
+</script>
+</body>
+</html>
